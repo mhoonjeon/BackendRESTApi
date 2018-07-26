@@ -9,6 +9,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 class Common(Configuration):
 
     INSTALLED_APPS = (
+        # Your apps
+        'channels',
+        'chat',
+        'BackendRESTApi.users',
+
         'django.contrib.admin',
         'django.contrib.auth',
         'django.contrib.contenttypes',
@@ -21,11 +26,6 @@ class Common(Configuration):
         'rest_framework',            # utilities for rest apis
         'rest_framework.authtoken',  # token authentication
         'django_filters',            # for filtering rest endpoints
-
-        # Your apps
-        'BackendRESTApi.users',
-        'channels',
-        'chat',
 
     )
 
@@ -201,3 +201,5 @@ class Common(Configuration):
             'rest_framework.authentication.TokenAuthentication',
         )
     }
+
+    ASGI_APPLICATION = 'BackendRESTApi.routing.application'
