@@ -24,6 +24,8 @@ class Common(Configuration):
 
         # Your apps
         'BackendRESTApi.users',
+        'channels',
+        'chat',
 
     )
 
