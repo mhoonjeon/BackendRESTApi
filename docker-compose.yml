@@ -3,6 +3,8 @@ version: '2'
 services:
   postgres:
     image: postgres:9.6
+  redis:
+    image: redis:4.0.10
   web:
     restart: always
     environment:
@@ -19,6 +21,7 @@ services:
       - "8000:8000"
     depends_on:
       - postgres
+      - redis
   documentation:
     restart: always
     build: ./
