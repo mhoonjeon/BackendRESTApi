@@ -36,4 +36,5 @@ django-storages==1.6.6
 boto3==1.7.63
 
 # Websocket
+channels_redis
 channels==2.1.2
