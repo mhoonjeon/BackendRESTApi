@@ -38,3 +38,4 @@ boto3==1.7.63
 # Websocket
 channels_redis
 channels==2.1.2
+selenium==3.13.0
