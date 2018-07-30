@@ -3,8 +3,15 @@ from channels.testing import ChannelsLiveServerTestCase
 from selenium import webdriver
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
 class ChatTests(ChannelsLiveServerTestCase):
+    """
+    Provides test class which connects to the Docker
+    container running Selenium.
+    """
+    host = 'web'  # Bind to 0.0.0.0 to allow external access
+
     serve_static = True  # emulate StaticLiveServerTestCase
 
     @classmethod
@@ -12,7 +19,15 @@ class ChatTests(ChannelsLiveServerTestCase):
         super().setUpClass()
         try:
             # NOTE: Requires "chromedriver" binary to be installed in $PATH
-            cls.driver = webdriver.Chrome()
+            cls.driver = webdriver.Remote(
+                #  Set to: htttp://{selenium-container-name}:port/wd/hub
+                #  In our example, the container is named `selenium`
+                #  and runs on port 4444
+                command_executor='http://selenium:4444/wd/hub',
+                # Set to CHROME since we are using the Chrome container
+                desired_capabilities=DesiredCapabilities.CHROME,
+            )
+            cls.driver.implicitly_wait(5)
         except:
             super().tearDownClass()
             raise
