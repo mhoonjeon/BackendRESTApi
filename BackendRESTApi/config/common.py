@@ -13,6 +13,8 @@ class Common(Configuration):
         'channels',
         'chat',
         'BackendRESTApi.users',
+        'BackendRESTApi.charts',
+        'BackendRESTApi.patients',
 
         'django.contrib.admin',
         'django.contrib.auth',
