@@ -15,7 +15,7 @@ class Common(Configuration):
         'BackendRESTApi.users',
         'BackendRESTApi.charts',
         'BackendRESTApi.patients',
-        'BackendRESTApi.sentences',
+        'BackendRESTApi.transcriptions',
 
         'django.contrib.admin',
         'django.contrib.auth',
@@ -210,7 +210,11 @@ class Common(Configuration):
     'default': {
         'BACKEND': 'channels_redis.core.RedisChannelLayer',
         'CONFIG': {
-            "hosts": [('redis', 6379)],
+            # If using docker
+            # "hosts": [('redis', 6379)],
+
+            # If run locally
+            "hosts": [('127.0.0.1', 6379)],
         },
     },
     }
