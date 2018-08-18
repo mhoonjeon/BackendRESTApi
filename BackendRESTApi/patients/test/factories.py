@@ -7,7 +7,7 @@ from ..models import Patient
 
 
 def get_age():
-    age_choices = [x[0] for x in Patient.GENDER]
+    age_choices = [x for x in range(0, 150)]
     return random.choice(age_choices)
 
 class PatientFactory(factory.django.DjangoModelFactory):
