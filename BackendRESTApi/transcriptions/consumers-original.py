@@ -15,7 +15,7 @@ RESPONSE_FROM_DEEP = {
     }
   ],
   "error_msg": "",
-  "created_at": "2012-04-23T18:25:43.511Z"
+  "created": "2012-04-23T18:25:43.511Z"
 }
 
 
