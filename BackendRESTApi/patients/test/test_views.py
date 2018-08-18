@@ -7,17 +7,20 @@ from faker import Faker
 from ..models import Patient
 from .factories import PatientFactory
 
+from BackendRESTApi.users.test.factories import UserFactory
+
 fake = Faker()
 
 
 class TestPatientPostTestCase(APITestCase):
     """
-    Tests /patients/ post operations.
+    Tests /patients list operations.
     """
 
     def setUp(self):
-        self.url = reverse('patient-post')
+        self.url = reverse('patient-list')
         self.patient_data = model_to_dict(PatientFactory.build())
+        self.client.force_authenticate(user=UserFactory.build())
 
     def test_post_request_with_no_data_fails(self):
         response = self.client.post(self.url, {})
@@ -29,3 +32,25 @@ class TestPatientPostTestCase(APITestCase):
 
         patient = Patient.objects.get(pk=response.data.get('id'))
         eq_(patient.name, self.patient_data.get('name'))
+
+    def test_get_list_request_succeeds(self):
+        PatientFactory.create_batch(size=3)
+        response = self.client.get(self.url)
+        eq_(len(response.json()['results']), 3)
+
+
+class TestUserDetailTestCase(APITestCase):
+    """
+    Tests /users detail operations.
+    """
+
+    def setUp(self):
+        PatientFactory.create_batch(size=4)
+        self.patient_id = Patient.objects.first().id
+        self.url = reverse('patient-detail', kwargs={'pk': self.patient_id})
+        self.client.force_authenticate(user=UserFactory.build())
+
+    def test_get_request_returns_a_given_user(self):
+        response = self.client.get(self.url)
+        eq_(response.status_code, status.HTTP_200_OK)
+        eq_(response.json()['id'], str(self.patient_id))
