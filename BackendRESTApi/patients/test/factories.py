@@ -1,8 +1,14 @@
+import pytz
+import random
+
 import factory
-from factory.fuzzy import FuzzyInteger
 
 from ..models import Patient
 
+
+def get_age():
+    age_choices = [x[0] for x in Patient.GENDER]
+    return random.choice(age_choices)
 
 class PatientFactory(factory.django.DjangoModelFactory):
 
@@ -13,6 +19,6 @@ class PatientFactory(factory.django.DjangoModelFactory):
     id = factory.Faker('uuid4')
     name = factory.Sequence(lambda n: f'testpatient{n}')
     gender = factory.Iterator([Patient.MALE, Patient.FEMALE])
-    age = FuzzyInteger(0,150)
-    created = factory.Faker('date_time')
-    modified = factory.Faker('date_time')
+    age = factory.LazyFunction(get_age)
+    created = factory.Faker('date_time', tzinfo=pytz.utc)
+    modified = factory.Faker('date_time', tzinfo=pytz.utc)
