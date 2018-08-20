@@ -30,3 +30,8 @@ class Production(Common):
     AWS_HEADERS = {
         'Cache-Control': 'max-age=86400, s-maxage=86400, must-revalidate',
     }
+
+    CORS_ORIGIN_WHITELIST = ALLOWED_HOSTS
+    # FIXME: To be deleted
+    CORS_ORIGIN_ALLOW_ALL = True
+    CORS_ALLOW_CREDENTIALS = False
