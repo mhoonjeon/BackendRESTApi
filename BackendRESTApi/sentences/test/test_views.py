@@ -33,6 +33,19 @@ class TestSentenceListTestCase(APITestCase):
         sentence = Sentence.objects.get(pk=response.data.get('id'))
         eq_(sentence.raw, self.sentence_data.get('raw'))
 
+    def test_post_request_with_multiple_data_succeeds(self):
+        sentence_count_before = Sentence.objects.count()
+        chart = ChartFactory.create()
+
+        sentence_list = []
+        for _ in range(3):
+            sentence_list.append(model_to_dict(SentenceFactory.build(chart=chart)))
+        response = self.client.post(self.url, sentence_list, format='json')
+        sentence_count_after = Sentence.objects.count()
+
+        eq_(response.status_code, status.HTTP_201_CREATED)
+        eq_(sentence_count_before + 3, sentence_count_after)
+
     def test_get_list_request_filtered_with_chart_id_succeeds(self):
         chart = ChartFactory.create()
         SentenceFactory.create_batch(size=3, chart=chart)
