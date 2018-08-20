@@ -220,5 +220,3 @@ class Common(Configuration):
         },
     },
     }
-
-    CORS_ORIGIN_WHITELIST = ALLOWED_HOSTS
