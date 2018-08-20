@@ -35,3 +35,16 @@ class TestChartListTestCase(APITestCase):
         ChartFactory.create_batch(size=3, created=datetime.now())
         response = self.client.get(self.url, {'created_today': 'true'} )
         eq_(len(response.json()['results']), 3)
+
+    def test_post_request_with_no_data_fails(self):
+        response = self.client.post(self.url, {})
+        eq_(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+    def test_post_request_with_valid_data_succeeds(self):
+        patient = PatientFactory.create()
+        chart_data = model_to_dict(ChartFactory.build(patient=patient))
+        response = self.client.post(self.url, chart_data)
+        eq_(response.status_code, status.HTTP_201_CREATED)
+
+        chart = Chart.objects.get(pk=response.data.get('id'))
+        eq_(str(chart.patient.id), chart_data.get('patient'))
