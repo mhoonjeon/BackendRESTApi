@@ -4,7 +4,7 @@ from rest_framework import viewsets, mixins
 from rest_framework.permissions import IsAuthenticated
 
 from .models import Chart
-from .serializers import ChartSerializer
+from .serializers import GetChartSerializer, CreateChartSerializer
 
 
 def created_today( queryset, name, value):
@@ -22,10 +22,16 @@ class ChartFilter(filters.FilterSet):
 
 
 class ChartViewSet(mixins.ListModelMixin,
-                     viewsets.GenericViewSet):
+                   mixins.CreateModelMixin,
+                   viewsets.GenericViewSet):
 
     queryset = Chart.objects.all()
-    serializer_class = ChartSerializer
+    serializer_class = GetChartSerializer
     permission_classes = (IsAuthenticated, )
     filter_backends = (filters.DjangoFilterBackend, )
     filterset_class = ChartFilter
+
+    def get_serializer_class(self):
+        if self.action == 'create':
+            return CreateChartSerializer
+        return super().get_serializer_class()
