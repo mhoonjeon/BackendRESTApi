@@ -45,7 +45,7 @@ class Common(Configuration):
         'django.middleware.clickjacking.XFrameOptionsMiddleware',
     )
 
-    ALLOWED_HOSTS = ["*"]
+    ALLOWED_HOSTS = ["*", "localhost:3000"]
     ROOT_URLCONF = 'BackendRESTApi.urls'
     SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
     WSGI_APPLICATION = 'BackendRESTApi.wsgi.application'
@@ -220,3 +220,5 @@ class Common(Configuration):
         },
     },
     }
+
+    CORS_ORIGIN_WHITELIST = ALLOWED_HOSTS
