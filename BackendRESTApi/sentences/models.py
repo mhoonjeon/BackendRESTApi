@@ -2,7 +2,6 @@ import uuid
 
 from model_utils import Choices
 from model_utils.models import TimeStampedModel
-# from simple_history.models import HistoricalRecords
 
 from django.db import models
 
@@ -22,4 +21,6 @@ class Sentence(TimeStampedModel):
     raw = models.CharField(max_length=1024)
     category = models.CharField(max_length=5, choices=CATEGORIES, null=True)
     deep_output = models.CharField(max_length=5, choices=CATEGORIES, null=True)
-    # history = HistoricalRecords()
+
+    class Meta:
+        ordering = ['-id']
