@@ -5,6 +5,7 @@ from django.contrib import admin
 from django.views.generic.base import RedirectView
 from rest_framework.routers import DefaultRouter
 from rest_framework.authtoken import views
+from .charts.views import ChartViewSet
 from .users.views import UserViewSet, UserCreateViewSet
 from .patients.views import PatientViewSet
 from .sentences.views import SentenceViewSet
@@ -14,6 +15,7 @@ router.register(r'users', UserViewSet)
 router.register(r'users', UserCreateViewSet)
 router.register(r'patients', PatientViewSet)
 router.register(r'sentences', SentenceViewSet)
+router.register(r'charts', ChartViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
