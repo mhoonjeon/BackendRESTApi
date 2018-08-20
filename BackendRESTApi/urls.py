@@ -7,11 +7,13 @@ from rest_framework.routers import DefaultRouter
 from rest_framework.authtoken import views
 from .users.views import UserViewSet, UserCreateViewSet
 from .patients.views import PatientViewSet
+from .sentences.views import SentenceViewSet
 
 router = DefaultRouter()
 router.register(r'users', UserViewSet)
 router.register(r'users', UserCreateViewSet)
 router.register(r'patients', PatientViewSet)
+router.register(r'sentences', SentenceViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
