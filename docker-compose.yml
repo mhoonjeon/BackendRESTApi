@@ -2,15 +2,19 @@ version: '2'
 
 services:
   postgres:
+    container_name: postgres
     image: postgres:9.6
   redis:
+    container_name: redis
     image: redis:4.0.10
   selenium:
+    container_name: selenium
     image: selenium/standalone-chrome-debug:3.7.1
     ports:
       - 4444:4444   # Selenium
       - 5900:5900   # VNC server
   web:
+    container_name: web
     restart: always
     environment:
       - DJANGO_SECRET_KEY=local
@@ -31,6 +35,7 @@ services:
     links:
       - selenium
   documentation:
+    container_name: documentation
     restart: always
     build: ./
     command: "mkdocs serve"
