@@ -9,7 +9,7 @@ from .factories import ChartFactory
 from BackendRESTApi.users.test.factories import UserFactory
 from BackendRESTApi.patients.test.factories import PatientFactory
 from BackendRESTApi.sentences.test.factories import SentenceFactory
-from datetime import datetime
+from datetime import datetime, timezone
 
 fake = Faker()
 
@@ -28,12 +28,15 @@ class TestChartListTestCase(APITestCase):
         ChartFactory.create_batch(size=3)
         ChartFactory.create_batch(size=3, patient=patient)
         response = self.client.get(self.url, {'patient': patient.id} )
+        self.assertIn('patient_id', response.json()['results'][0])
+        self.assertIn('patient_name', response.json()['results'][0])
+        self.assertIn('patient_cc', response.json()['results'][0])
         eq_(len(response.json()['results']), 3)
 
     def test_get_list_request_filtered_with_created_succeeds(self):
         patient = PatientFactory.create()
         ChartFactory.create_batch(size=3)
-        now = datetime.now()
+        now = datetime.now(tz=timezone.utc)
         ChartFactory.create_batch(size=3, created=now)
         for chart in Chart.objects.filter(created=now):
             SentenceFactory.create(chart=chart, category='CC')
