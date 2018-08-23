@@ -8,6 +8,7 @@ from ..models import Chart
 from .factories import ChartFactory
 from BackendRESTApi.users.test.factories import UserFactory
 from BackendRESTApi.patients.test.factories import PatientFactory
+from BackendRESTApi.sentences.test.factories import SentenceFactory
 from datetime import datetime
 
 fake = Faker()
@@ -32,8 +33,15 @@ class TestChartListTestCase(APITestCase):
     def test_get_list_request_filtered_with_created_succeeds(self):
         patient = PatientFactory.create()
         ChartFactory.create_batch(size=3)
-        ChartFactory.create_batch(size=3, created=datetime.now())
+        now = datetime.now()
+        ChartFactory.create_batch(size=3, created=now)
+        for chart in Chart.objects.filter(created=now):
+            SentenceFactory.create(chart=chart, category='CC')
+            SentenceFactory.create(chart=chart, category='CC')
         response = self.client.get(self.url, {'created_today': 'true'} )
+        self.assertIn('patient_id', response.json()['results'][0])
+        self.assertIn('patient_name', response.json()['results'][0])
+        self.assertIn('patient_cc', response.json()['results'][0])
         eq_(len(response.json()['results']), 3)
 
     def test_post_request_with_no_data_fails(self):
