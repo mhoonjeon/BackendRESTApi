@@ -28,12 +28,11 @@ class GetChartSerializer(serializers.ModelSerializer):
         request = kwargs['context']['request']
         remove_patient_name = request.GET.get('patient', False)
         if remove_patient_name:
-            self.fields.pop('patient_name', None)
             self.fields.pop('patient', None)
 
     def get_patient_cc(self, object):
         try:
-            # Two of more sentences are mapped to CC
+            # Two of more sentences may be mapped to CC
             patient_cc = object.sentences.filter(category='CC')[:1].get()
             return patient_cc.raw
         except Sentence.DoesNotExist:
