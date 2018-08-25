@@ -23,3 +23,12 @@ class Local(Common):
     EMAIL_HOST = 'localhost'
     EMAIL_PORT = 1025
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+    # Admin autocreate on docker-compose up -d
+    ADMINS = (
+        # ('Your Name', 'your_email@domain.com'),
+        ('admin', 'admin@mediscri.com'),
+    )
+    ADMIN_USERNAME = 'admin'
+    ADMIN_EMAIL = 'admin@mediscri.com'
+    ADMIN_INITIAL_PASSWORD = 'admin' # To be changed after first login by admin
