@@ -17,6 +17,7 @@ class Common(Configuration):
         'BackendRESTApi.patients',
         'BackendRESTApi.transcriptions',
         'BackendRESTApi.sentences',
+        'BackendRESTApi.deeplearning',
 
         'django.contrib.admin',
         'django.contrib.auth',
