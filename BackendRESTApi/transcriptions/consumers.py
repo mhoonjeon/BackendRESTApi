@@ -32,4 +32,4 @@ class ClientConsumer(AsyncWebsocketConsumer):
 
         clf = Classifier()
         result = clf.inference(raw_sentence)
-        await self.send(text_data=json.dumps(result))
+        await self.send(text_data=result)
