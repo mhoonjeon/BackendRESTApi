@@ -5,6 +5,10 @@ ENV PYTHONUNBUFFERED 1
 COPY ./requirements.txt requirements.txt
 RUN pip3 install -r requirements.txt
 
+# Apply deeplearning module
+RUN apt-get update -y
+RUN apt-get install -y g++ openjdk-8-jdk python-dev python3-dev
+
 # Adds our application code to the image
 COPY . code
 WORKDIR code
