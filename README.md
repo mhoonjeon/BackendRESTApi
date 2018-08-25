@@ -1,75 +1,44 @@
-# mediscri
+# Mediscri BackendRESTApi
 
 [![Build Status](https://travis-ci.org/mhoonjeon/mediscri.svg?branch=master)](https://travis-ci.org/mhoonjeon/mediscri)
 [![Built with](https://img.shields.io/badge/Built_with-Cookiecutter_Django_Rest-F7B633.svg)](https://github.com/agconti/cookiecutter-django-rest)
 
-BackendRESTApi for mediscri. Check out the project's [documentation](http://mhoonjeon.github.io/mediscri/).
+ 소프트웨어 마에스트로 9기 mediscri팀의 백엔드 서버입니다.
 
-# Prerequisites
+# 사전 설치
 
-- [Docker](https://docs.docker.com/docker-for-mac/install/)  
-- [Travis CLI](http://blog.travis-ci.com/2013-01-14-new-client/)
-- [Heroku Toolbelt](https://toolbelt.heroku.com/)
+- [Docker](https://docs.docker.com/docker-for-mac/install/) 를 설치해주시고, 도커 머신를 띄워주셔야 합니다. (상단의 도커 아이콘을 클릭했을 때 Docker is running!을 확인해주세요.)
 
-# Local Development
+# 로컬 환경에서 확인하기
 
-Start the dev server for local development:
-```bash
-docker-compose up
+Github에서 메디스크리 백엔드 서버 레포지토리를 클론합니다.
+
+```shell
+~$ git clone https://github.com/Mediscri/BackendRESTApi.git
 ```
 
-Run a command inside the docker container:
+Github에서 메디스크리 백엔드 서버 레포지토리를 클론합니다.
 
-```bash
-docker-compose run --rm web [command]
+```shell
+~$ cd BackendRESTApi
 ```
 
-# Continuous Deployment
-
-Deployment is automated via Travis. When builds pass on the master or qa branch, Travis will deploy that branch to Heroku. Follow these steps to enable this feature.
-
-Initialize the production server:
-
-```
-heroku create BackendRESTApi-prod --remote prod && \
-    heroku addons:create newrelic:wayne --app BackendRESTApi-prod && \
-    heroku addons:create heroku-postgresql:hobby-dev --app BackendRESTApi-prod && \
-    heroku config:set DJANGO_SECRET_KEY=`openssl rand -base64 32` \
-        DJANGO_AWS_ACCESS_KEY_ID="Add your id" \
-        DJANGO_AWS_SECRET_ACCESS_KEY="Add your key" \
-        DJANGO_AWS_STORAGE_BUCKET_NAME="BackendRESTApi-prod" \
-        DJANGO_CONFIGURATION="Production" \
-        DJANGO_SETTINGS_MODULE="BackendRESTApi.config" \
-        --app BackendRESTApi-prod
-```
-
-Initialize the qa server:
-
-```
-heroku create BackendRESTApi-qa --remote qa && \
-    heroku addons:create newrelic:wayne --app BackendRESTApi-qa && \
-    heroku addons:create heroku-postgresql:hobby-dev --app BackendRESTApi-qa && \
-    heroku config:set DJANGO_SECRET_KEY=`openssl rand -base64 32` \
-        DJANGO_AWS_ACCESS_KEY_ID="Add your id" \
-        DJANGO_AWS_SECRET_ACCESS_KEY="Add your key" \
-        DJANGO_AWS_STORAGE_BUCKET_NAME="BackendRESTApi-qa" \
-        DJANGO_CONFIGURATION="Production" \
-        DJANGO_SETTINGS_MODULE="BackendRESTApi.config" \
-        --app BackendRESTApi-qa
-```
-
-Securely add your Heroku credentials to Travis so that it can automatically deploy your changes:
+도커를 사용해, 미리 설정된 docker containers 이미지를 빌드합니다.
 
 ```bash
-travis encrypt HEROKU_AUTH_TOKEN="$(heroku auth:token)" --add
+~$ docker-compose build
 ```
 
-Commit your changes and push to master and qa to trigger your first deploys:
+도커를 이용해서 django와 django rest framework을 사용한 server를 로컬 환경에 띄웁니다.
 
 ```bash
-git commit -a -m "ci(travis): add Heroku credentials" && \
-git push origin master:qa && \
-git push origin master
+~$ cd docker-compose up -d
 ```
 
-You're now ready to continuously ship! ✨ 💅 🛳
+크롬을 열고 작동여부를 확인합니다. Django Rest Framework 화면이 뜨면 잘 작동되는 것입니다.
+
+```http
+http://localhost:8000/api/v1/
+```
+
+이제 클라이언트 앱을 띄울 차례입니다. [메디스크리 클라이언트 앱의 README](https://github.com/Mediscri/ClientDoctor)를 참고해주세요.
