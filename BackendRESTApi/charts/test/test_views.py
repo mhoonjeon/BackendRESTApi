@@ -8,7 +8,7 @@ from ..models import Chart
 from .factories import ChartFactory
 from BackendRESTApi.users.test.factories import UserFactory
 from BackendRESTApi.patients.test.factories import PatientFactory
-from datetime import datetime
+from datetime import datetime, timezone
 
 fake = Faker()
 
@@ -32,7 +32,7 @@ class TestChartListTestCase(APITestCase):
     def test_get_list_request_filtered_with_created_succeeds(self):
         patient = PatientFactory.create()
         ChartFactory.create_batch(size=3)
-        ChartFactory.create_batch(size=3, created=datetime.now())
+        ChartFactory.create_batch(size=3, created=datetime.now(timezone.utc))
         response = self.client.get(self.url, {'created_today': 'true'} )
         eq_(len(response.json()['results']), 3)
 

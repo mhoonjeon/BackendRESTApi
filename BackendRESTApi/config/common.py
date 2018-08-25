@@ -17,6 +17,7 @@ class Common(Configuration):
         'BackendRESTApi.patients',
         'BackendRESTApi.transcriptions',
         'BackendRESTApi.sentences',
+        'BackendRESTApi.deeplearning',
 
         'django.contrib.admin',
         'django.contrib.auth',
@@ -35,9 +36,9 @@ class Common(Configuration):
 
     # https://docs.djangoproject.com/en/2.0/topics/http/middleware/
     MIDDLEWARE = (
+        'corsheaders.middleware.CorsMiddleware',
         'django.middleware.security.SecurityMiddleware',
         'django.contrib.sessions.middleware.SessionMiddleware',
-        'corsheaders.middleware.CorsMiddleware',
         'django.middleware.common.CommonMiddleware',
         'django.middleware.csrf.CsrfViewMiddleware',
         'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -45,7 +46,7 @@ class Common(Configuration):
         'django.middleware.clickjacking.XFrameOptionsMiddleware',
     )
 
-    ALLOWED_HOSTS = ["*"]
+    ALLOWED_HOSTS = ["*", "localhost:3000"]
     ROOT_URLCONF = 'BackendRESTApi.urls'
     SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
     WSGI_APPLICATION = 'BackendRESTApi.wsgi.application'
