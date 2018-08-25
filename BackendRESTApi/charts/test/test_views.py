@@ -28,9 +28,8 @@ class TestChartListTestCase(APITestCase):
         ChartFactory.create_batch(size=3)
         ChartFactory.create_batch(size=3, patient=patient)
         response = self.client.get(self.url, {'patient': patient.id} )
-        self.assertIn('patient_id', response.json()['results'][0])
-        self.assertIn('patient_name', response.json()['results'][0])
-        self.assertIn('patient_cc', response.json()['results'][0])
+        self.assertIn('patient', response.json()['results'][0])
+        self.assertIn('cc', response.json()['results'][0])
         eq_(len(response.json()['results']), 3)
 
     def test_get_list_request_filtered_with_created_succeeds(self):
@@ -42,9 +41,8 @@ class TestChartListTestCase(APITestCase):
             SentenceFactory.create(chart=chart, category='CC')
             SentenceFactory.create(chart=chart, category='CC')
         response = self.client.get(self.url, {'created_today': 'true'} )
-        self.assertIn('patient_id', response.json()['results'][0])
-        self.assertIn('patient_name', response.json()['results'][0])
-        self.assertIn('patient_cc', response.json()['results'][0])
+        self.assertIn('patient', response.json()['results'][0])
+        self.assertIn('cc', response.json()['results'][0])
         eq_(len(response.json()['results']), 3)
 
     def test_post_request_with_no_data_fails(self):
