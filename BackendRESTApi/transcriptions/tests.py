@@ -16,7 +16,7 @@ async def test_frontend_can_test_temporarily_before_deep_integration():
     assert connected
 
     text_data = {
-        "raw_sentence": "My stomach aches",
+        "raw_sentence": "배가 아파요",
     }
 
     # client send text to deep learning and check if deep engine got it
@@ -24,5 +24,6 @@ async def test_frontend_can_test_temporarily_before_deep_integration():
     response = await client_communicator.receive_from()
     response = json.loads(response)
     assert 'deep_output' in response
+    assert 'raw_sentence' in response
 
     await client_communicator.disconnect()
