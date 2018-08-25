@@ -35,6 +35,12 @@ BackendRESTApi 디렉토리로 이동합니다.
 ~$ docker-compose up -d
 ```
 
+테스트를 돌려볼까요?
+
+```bash
+~$ docker-compose exec web pytest -s -v
+```
+
 크롬을 열고 작동여부를 확인합니다. Django Rest Framework 화면이 뜨면 잘 작동되는 것입니다.
 
 ```http
