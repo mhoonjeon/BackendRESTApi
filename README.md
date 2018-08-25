@@ -17,7 +17,7 @@ Github에서 메디스크리 백엔드 서버 레포지토리를 클론합니다
 ~$ git clone https://github.com/Mediscri/BackendRESTApi.git
 ```
 
-Github에서 메디스크리 백엔드 서버 레포지토리를 클론합니다.
+BackendRESTApi 디렉토리로 이동합니다.
 
 ```shell
 ~$ cd BackendRESTApi
@@ -32,7 +32,7 @@ Github에서 메디스크리 백엔드 서버 레포지토리를 클론합니다
 도커를 이용해서 django와 django rest framework을 사용한 server를 로컬 환경에 띄웁니다.
 
 ```bash
-~$ cd docker-compose up -d
+~$ docker-compose up -d
 ```
 
 크롬을 열고 작동여부를 확인합니다. Django Rest Framework 화면이 뜨면 잘 작동되는 것입니다.
