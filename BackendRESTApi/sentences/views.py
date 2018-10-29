@@ -8,9 +8,9 @@ from .serializers import SentenceSerializer
 
 
 class SentenceViewSet(mixins.CreateModelMixin,
-                     mixins.ListModelMixin,
-                     mixins.RetrieveModelMixin,
-                     viewsets.GenericViewSet):
+                      mixins.ListModelMixin,
+                      mixins.RetrieveModelMixin,
+                      viewsets.GenericViewSet):
 
     queryset = Sentence.objects.all()
     serializer_class = SentenceSerializer
@@ -22,4 +22,3 @@ class SentenceViewSet(mixins.CreateModelMixin,
         if isinstance(kwargs.get('data', {}), list):
             kwargs['many'] = True
         return super().get_serializer(*args, **kwargs)
-

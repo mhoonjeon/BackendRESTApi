@@ -10,3 +10,6 @@ pages:
   - API:
     - Authentication: 'api/authentication.md'
     - Users: 'api/users.md'
+    - Charts: 'api/charts.md'
+    - Sententes: 'api/sentences.md'
+    - Patients: 'api/patients.md'

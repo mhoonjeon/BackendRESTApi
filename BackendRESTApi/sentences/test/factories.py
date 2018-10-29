@@ -22,6 +22,5 @@ class SentenceFactory(factory.django.DjangoModelFactory):
     chart = factory.SubFactory(ChartFactory)
     raw = factory.Faker('sentence')
     category = factory.LazyFunction(get_category)
-    deep_output = factory.LazyFunction(get_category)
     created = factory.Faker('date_time', tzinfo=pytz.utc)
     modified = factory.Faker('date_time', tzinfo=pytz.utc)

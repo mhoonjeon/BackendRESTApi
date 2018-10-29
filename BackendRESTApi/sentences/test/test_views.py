@@ -1,3 +1,5 @@
+import json
+
 from django.urls import reverse
 from django.forms.models import model_to_dict
 from nose.tools import ok_, eq_
@@ -51,3 +53,26 @@ class TestSentenceListTestCase(APITestCase):
         SentenceFactory.create_batch(size=3, chart=chart)
         response = self.client.get(self.url, {'chart': chart.id} )
         eq_(len(response.json()['results']), 3)
+
+    def test_list_create_sentences_succeeds(self):
+        chart = ChartFactory.create()
+        payload = [
+            {
+                "chart": chart.id,
+                "raw": "머리가 아파요",
+                "category": "CC"
+            },
+            {
+                "chart": chart.id,
+                "raw": "기침이 나요",
+                "category": "PI"
+            },
+            {
+                "chart": chart.id,
+                "raw": "10년전부터 당뇨가 있어요",
+                "category": "PMH"
+            }
+        ]
+        response = self.client.post(self.url, json.dumps(payload), content_type='application/json')
+        eq_(response.status_code, status.HTTP_201_CREATED)
+        eq_(len(response.json()), 3)
