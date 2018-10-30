@@ -11,13 +11,10 @@ class Common(Configuration):
     INSTALLED_APPS = (
         # Your apps
         'channels',
-        'chat',
         'BackendRESTApi.users',
         'BackendRESTApi.charts',
         'BackendRESTApi.patients',
-        'BackendRESTApi.transcriptions',
         'BackendRESTApi.sentences',
-        'BackendRESTApi.deeplearning',
 
         'django.contrib.admin',
         'django.contrib.auth',
