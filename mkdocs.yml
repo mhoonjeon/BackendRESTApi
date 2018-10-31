@@ -11,5 +11,5 @@ pages:
     - Authentication: 'api/authentication.md'
     - Users: 'api/users.md'
     - Charts: 'api/charts.md'
-    - Sententes: 'api/sentences.md'
+    - Progress_charts: 'api/progress_charts.md'
     - Patients: 'api/patients.md'
