@@ -1,6 +1,6 @@
 # Charts
 
-## 차트 생성하기
+## 초진차트 생성하기
 
 **Request**:
 
@@ -10,15 +10,38 @@ Content-Type application/json
 Authorization: Token 9944b09199c62bcf9418ad846dd0e4bbdfc6ee4b
 
 {
-	"patient": "c614a508-793a-4ad9-8273-80084712f222",
+	"patient": "9ea88e27-1aa5-4046-86b6-fa64d75059ce",
+    "cc": "복통",
+    "pi": "내원 3일전부터 속이 쓰리고 배가 아파옴",
+    "pmhx": "당뇨, 고혈압, 3년 전 췌장염",
+    "psxhx": "수술한 적 없음",
+    "fhx": "어머니 위암",
+    "shx": "술, 담배 안함, 직업: 무직",
+    "medications": "고혈압, 당뇨 약 복용 중",
+    "ros": "배가 살살 아프고 하복부 통증",
+    "pe": "rebound tenderness, 배꼽 주위 압통",
+    "labs": "AST, ALT 상승",
+    "dx": "r/o 충수돌기염",
+    "plan": "복부초음파"
 }
 ```
 
 **Parameters**:
 
-Name       | Nested    | 타입   | 필수 | 주의
+Name       | 설명      | 타입   | 필수 | 주의
 -----------|-----------|--------|------|------------
 patient    |           | string | Yes  | patient의 id
+cc         | 주소증    | string | No   | 
+pi         | 현병력    | string | No   | 
+pmhx       | 과거력    | string | No   | 
+psxhx      | 수술력    | string | No   | 
+fhx        | 가족력    | string | No   | 
+shx        | 사회력    | string | No   | 
+medications| 약물복용력| string | No   | 
+ros        | 환자호소  | string | No   | 
+pe         | 신체진찰  | string | No   | 
+dx         | 진단      | string | No   | 
+plan       | 계획      | string | No   | 
 
 **Response**:
 
@@ -27,14 +50,26 @@ Content-Type application/json
 201 Created
 
 {
-    "id": "75d9db76-3c3f-4232-b910-6de1a0d97c36",
-    "created": "2018-10-29T11:04:50+0000",
-    "modified": "2018-10-29T11:04:50+0000",
-    "patient": "c614a508-793a-4ad9-8273-80084712f222"
+    "id": "8bd53fdf-99ae-4bcb-ba3e-218f2b89c4a1",
+    "created": "2018-10-31T13:56:38+0000",
+    "modified": "2018-10-31T13:56:38+0000",
+    "cc": "복통",
+    "pi": "내원 3일전부터 속이 쓰리고 배가 아파옴",
+    "pmhx": "당뇨, 고혈압, 3년 전 췌장염",
+    "psxhx": "수술한 적 없음",
+    "fhx": "어머니 위암",
+    "shx": "술, 담배 안함, 직업: 무직",
+    "medications": "고혈압, 당뇨 약 복용 중",
+    "ros": "배가 살살 아프고 하복부 통증",
+    "pe": "rebound tenderness, 배꼽 주위 압통",
+    "labs": "AST, ALT 상승",
+    "dx": "r/o 충수돌기염",
+    "plan": "복부초음파",
+    "patient": "9ea88e27-1aa5-4046-86b6-fa64d75059ce"
 }
 ```
 
-## 차트 리스트 가져오기
+## 초진차트 리스트 가져오기
 
 **Request**:
 
@@ -45,7 +80,7 @@ Authorization: Token 9944b09199c62bcf9418ad846dd0e4bbdfc6ee4b
 ```
 **Query Parameter(선택사항)**:
 
-`GET` `api/v1/charts/?created_today=true`로 요청을 날리면 오늘 생성된 차트만 필터링 해준다.
+`GET` `api/v1/charts/?patient=<patient_id>`로 요청을 날리면 특정 환자의 차트만 필터링 해준다.
 
 **Response**:
 
@@ -54,81 +89,68 @@ Content-Type application/json
 200 OK
 
 {
-    "count": 6,
+    "count": 2,
     "next": null,
     "previous": null,
     "results": [
         {
-            "id": "f7fedb8a-e8cd-4c88-8696-701248cfddfc",
+            "id": "8bd53fdf-99ae-4bcb-ba3e-218f2b89c4a1",
             "patient": {
-                "id": "80a02012-eadc-4f11-b21b-92f7de9eee71",
-                "name": "전승훈",
+                "id": "9ea88e27-1aa5-4046-86b6-fa64d75059ce",
+                "name": "전명훈",
                 "gender": "male",
-                "age": 11
+                "age": 23
             },
+            "progress_charts": [],
+            "created": "2018년 10월 31일",
+            "modified": "2018년 10월 31일",
+            "cc": "복통",
+            "pi": "내원 3일전부터 속이 쓰리고 배가 아파옴",
+            "pmhx": "당뇨, 고혈압, 3년 전 췌장염",
+            "psxhx": "수술한 적 없음",
+            "fhx": "어머니 위암",
+            "shx": "술, 담배 안함, 직업: 무직",
+            "medications": "고혈압, 당뇨 약 복용 중",
+            "ros": "배가 살살 아프고 하복부 통증",
+            "pe": "rebound tenderness, 배꼽 주위 압통",
+            "labs": "AST, ALT 상승",
+            "dx": "r/o 충수돌기염",
+            "plan": "복부초음파"
+        },
+        {
+            "id": "89b22c32-ee98-4548-ab9e-df3fe215a59d",
+            "patient": {
+                "id": "9ea88e27-1aa5-4046-86b6-fa64d75059ce",
+                "name": "전명훈",
+                "gender": "male",
+                "age": 23
+            },
+            "progress_charts": [
+                {
+                    "id": "ecd02b79-dc47-441e-941f-02b179cd3039",
+                    "created": "2018년 10월 31일",
+                    "modified": "2018년 10월 31일",
+                    "subjective": "나아짐",
+                    "objective": "좋아진듯",
+                    "assessment": "복통",
+                    "plan": "침치료",
+                    "admission_chart": "89b22c32-ee98-4548-ab9e-df3fe215a59d"
+                }
+            ],
+            "created": "2018년 10월 31일",
+            "modified": "2018년 10월 31일",
             "cc": "배가 아파요",
-            "created": "2018년 10월 28일 09:58:09",
-            "modified": "2018년 10월 28일 09:58:09"
-        },
-        {
-            "id": "dee608f2-37c9-46f8-a413-a1eb8fb9fec3",
-            "patient": {
-                "id": "a97cf41f-5f43-4584-8147-7b72902eb495",
-                "name": "김인석",
-                "gender": "male",
-                "age": 23
-            },
-            "cc": null,
-            "created": "2018년 10월 29일 10:41:33",
-            "modified": "2018년 10월 29일 10:41:33"
-        },
-        {
-            "id": "adbe6eed-09ac-4773-9c0d-e6294f1994b5",
-            "patient": {
-                "id": "9fbb9bc9-7c0e-4a0a-b65f-6d188f33d180",
-                "name": "허환",
-                "gender": "male",
-                "age": 23
-            },
-            "cc": null,
-            "created": "2018년 10월 29일 00:54:28",
-            "modified": "2018년 10월 29일 00:54:28"
-        },
-        {
-            "id": "a6d40809-af34-4563-8b8b-184cef78b005",
-            "patient": {
-                "id": "c614a508-793a-4ad9-8273-80084712f222",
-                "name": "전명훈",
-                "gender": "male",
-                "age": 23
-            },
-            "cc": null,
-            "created": "2018년 10월 28일 00:46:34",
-            "modified": "2018년 10월 28일 00:46:34"
-        },
-        {
-            "id": "75d9db76-3c3f-4232-b910-6de1a0d97c36",
-            "patient": {
-                "id": "c614a508-793a-4ad9-8273-80084712f222",
-                "name": "전명훈",
-                "gender": "male",
-                "age": 23
-            },
-            "cc": null,
-            "created": "2018년 10월 29일 11:04:50",
-            "modified": "2018년 10월 29일 11:04:50"
-        },
-        {
-            "id": "250aed5d-acc2-44d1-88af-5f3e9072d8cb",
-            "patient": {
-                "id": "85491ad5-4429-448b-af6e-f63f6de5e1ed",
-                "name": "원지운",
-                "gender": "male",
-                "age": 23
-            },
-            "cc": null,
-            "created": "2018년 10월 29일 10:11:34",
-            "modified": "2018년 10월 29일 10:11:34"
+            "pi": "",
+            "pmhx": "",
+            "psxhx": "",
+            "fhx": "",
+            "shx": "",
+            "medications": "",
+            "ros": "",
+            "pe": "",
+            "labs": "",
+            "dx": "",
+            "plan": ""
         }
     ]
 }

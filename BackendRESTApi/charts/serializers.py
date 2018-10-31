@@ -1,31 +1,38 @@
 from rest_framework import serializers
-from .models import Chart
+from .models import AdmissionChart, ProgressChart
 from BackendRESTApi.patients.serializers import PatientSerializer
-from BackendRESTApi.sentences.serializers import SentenceSerializer
-from BackendRESTApi.sentences.models import Sentence
 
 
-class CreateChartSerializer(serializers.ModelSerializer):
+class CreateAdmissionChartSerializer(serializers.ModelSerializer):
 
     class Meta:
-        model = Chart
+        model = AdmissionChart
         fields = '__all__'
 
 
-class GetChartSerializer(serializers.ModelSerializer):
+class CreateProgressChartSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = ProgressChart
+        fields = '__all__'
+
+
+class GetProgressChartSerializer(serializers.ModelSerializer):
     patient = PatientSerializer(read_only=True)
-    cc = serializers.SerializerMethodField()
-    created = serializers.DateTimeField(format="%Y년 %m월 %d일 %H:%M:%S")
-    modified = serializers.DateTimeField(format="%Y년 %m월 %d일 %H:%M:%S")
+    created = serializers.DateTimeField(format="%Y년 %m월 %d일")
+    modified = serializers.DateTimeField(format="%Y년 %m월 %d일")
 
     class Meta:
-        model = Chart
+        model = ProgressChart
         fields = '__all__'
 
-    def get_cc(self, object):
-        try:
-            # Two of more sentences may be mapped to CC
-            patient_cc = object.sentences.filter(category='CC')[:1].get()
-            return patient_cc.raw
-        except Sentence.DoesNotExist:
-            return None
+
+class GetAdmissionChartSerializer(serializers.ModelSerializer):
+    patient = PatientSerializer(read_only=True)
+    progress_charts = GetProgressChartSerializer(many=True)
+    created = serializers.DateTimeField(format="%Y년 %m월 %d일")
+    modified = serializers.DateTimeField(format="%Y년 %m월 %d일")
+
+    class Meta:
+        model = AdmissionChart
+        fields = '__all__'
