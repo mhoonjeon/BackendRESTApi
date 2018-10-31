@@ -8,13 +8,11 @@ from rest_framework.authtoken import views
 from .charts.views import ChartViewSet
 from .users.views import UserViewSet, UserCreateViewSet
 from .patients.views import PatientViewSet
-from .sentences.views import SentenceViewSet
 
 router = DefaultRouter()
 router.register(r'users', UserViewSet)
 router.register(r'users', UserCreateViewSet)
 router.register(r'patients', PatientViewSet)
-router.register(r'sentences', SentenceViewSet)
 router.register(r'charts', ChartViewSet)
 
 urlpatterns = [
@@ -22,9 +20,6 @@ urlpatterns = [
     path('api/v1/', include(router.urls)),
     path('api-token-auth/', views.obtain_auth_token),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-
-    # Custome app
-    path('chat/', include('chat.urls')),
 
     # the 'api-root' from django rest-frameworks default router
     # http://www.django-rest-framework.org/api-guide/routers/#defaultrouter

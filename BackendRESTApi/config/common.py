@@ -10,11 +10,9 @@ class Common(Configuration):
 
     INSTALLED_APPS = (
         # Your apps
-        'channels',
         'BackendRESTApi.users',
         'BackendRESTApi.charts',
         'BackendRESTApi.patients',
-        'BackendRESTApi.sentences',
 
         'django.contrib.admin',
         'django.contrib.auth',
@@ -203,20 +201,6 @@ class Common(Configuration):
             'rest_framework.authentication.SessionAuthentication',
             'rest_framework.authentication.TokenAuthentication',
         )
-    }
-
-    ASGI_APPLICATION = 'BackendRESTApi.routing.application'
-    CHANNEL_LAYERS = {
-    'default': {
-        'BACKEND': 'channels_redis.core.RedisChannelLayer',
-        'CONFIG': {
-            # If using docker
-            "hosts": [('redis', 6379)],
-
-            # If run locally
-            # "hosts": [('127.0.0.1', 6379)],
-        },
-    },
     }
 
     CORS_ORIGIN_WHITELIST = ALLOWED_HOSTS
