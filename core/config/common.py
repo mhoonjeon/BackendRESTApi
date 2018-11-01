@@ -10,9 +10,9 @@ class Common(Configuration):
 
     INSTALLED_APPS = (
         # Your apps
-        'BackendRESTApi.users',
-        'BackendRESTApi.charts',
-        'BackendRESTApi.patients',
+        'users',
+        'charts',
+        'patients',
 
         'django.contrib.admin',
         'django.contrib.auth',
@@ -42,9 +42,9 @@ class Common(Configuration):
     )
 
     ALLOWED_HOSTS = ["*", "localhost:3000"]
-    ROOT_URLCONF = 'BackendRESTApi.urls'
+    ROOT_URLCONF = 'core.urls'
     SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
-    WSGI_APPLICATION = 'BackendRESTApi.wsgi.application'
+    WSGI_APPLICATION = 'core.wsgi.application'
 
     # Email
     EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'

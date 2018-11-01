@@ -3,7 +3,7 @@ from django.forms.models import model_to_dict
 from nose.tools import eq_, ok_
 from .factories import ChartFactory
 from ..serializers import GetAdmissionChartSerializer
-from BackendRESTApi.charts.test.factories import AdmissionChartFactory
+from charts.test.factories import AdmissionChartFactory
 
 class TestCreateChartSerializer(TestCase):
 

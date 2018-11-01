@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from .models import AdmissionChart, ProgressChart
-from BackendRESTApi.patients.serializers import PatientSerializer
+from patients.serializers import PatientSerializer
 
 
 class CreateAdmissionChartSerializer(serializers.ModelSerializer):

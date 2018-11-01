@@ -2,7 +2,7 @@ import pytz
 
 import factory
 
-from BackendRESTApi.patients.test.factories import PatientFactory
+from patients.test.factories import PatientFactory
 
 
 class AdmissionChartFactory(factory.django.DjangoModelFactory):

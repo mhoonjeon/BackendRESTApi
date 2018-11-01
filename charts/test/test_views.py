@@ -6,8 +6,8 @@ from rest_framework import status
 from faker import Faker
 from ..models import Chart
 from .factories import ChartFactory
-from BackendRESTApi.users.test.factories import UserFactory
-from BackendRESTApi.patients.test.factories import PatientFactory
+from users.test.factories import UserFactory
+from patients.test.factories import PatientFactory
 from datetime import datetime, timezone
 
 fake = Faker()

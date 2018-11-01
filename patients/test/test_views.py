@@ -7,7 +7,7 @@ from faker import Faker
 from ..models import Patient
 from .factories import PatientFactory
 
-from BackendRESTApi.users.test.factories import UserFactory
+from users.test.factories import UserFactory
 
 fake = Faker()
 
