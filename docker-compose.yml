@@ -36,8 +36,8 @@ services:
     links:
       - selenium
     # Uncomment to debug and exec 'docker attach web'
-    #stdin_open: true
-    #tty: true
+    stdin_open: true
+    tty: true
   documentation:
     container_name: documentation
     restart: always

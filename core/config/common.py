@@ -13,6 +13,8 @@ class Common(Configuration):
         'users',
         'charts',
         'patients',
+        'profiles',
+        'articles',
 
         'django.contrib.admin',
         'django.contrib.auth',
