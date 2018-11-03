@@ -1,13 +1,23 @@
 from rest_framework import serializers
 from .models import AdmissionChart, ProgressChart
-from patients.serializers import PatientSerializer
+from patients.models import Patient
+from patients.serializers import PatientSerializer, CreatePatientSerializer
 
 
 class CreateAdmissionChartSerializer(serializers.ModelSerializer):
+    patient = CreatePatientSerializer()
 
     class Meta:
         model = AdmissionChart
         fields = '__all__'
+
+    def create(self, validated_data):
+        patient_data = validated_data.pop('patient')
+        patient = Patient.objects.create(**patient_data)
+
+        admission_chart = AdmissionChart.objects.create(patient=patient, **validated_data)
+
+        return admission_chart
 
 
 class CreateProgressChartSerializer(serializers.ModelSerializer):

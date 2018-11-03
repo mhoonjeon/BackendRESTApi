@@ -10,6 +10,11 @@ Content-Type application/json
 Authorization: Token 9944b09199c62bcf9418ad846dd0e4bbdfc6ee4b
 
 {
+    "patient": {
+        "name": "이일호",
+        "gender": 0,  // 0: 남자, 1: 여자
+        "age": 23
+    },
 	"patient": "9ea88e27-1aa5-4046-86b6-fa64d75059ce",
     "cc": "복통",
     "pi": "내원 3일전부터 속이 쓰리고 배가 아파옴",
@@ -51,6 +56,12 @@ Content-Type application/json
 
 {
     "id": "8bd53fdf-99ae-4bcb-ba3e-218f2b89c4a1",
+    "patient": {
+        "id": "e82bddd4-a3fe-436f-9483-2604f6e32540",
+        "name": "이일호",
+        "gender": 0,
+        "age": 23
+    },
     "created": "2018-10-31T13:56:38+0000",
     "modified": "2018-10-31T13:56:38+0000",
     "cc": "복통",
@@ -65,7 +76,6 @@ Content-Type application/json
     "labs": "AST, ALT 상승",
     "dx": "r/o 충수돌기염",
     "plan": "복부초음파",
-    "patient": "9ea88e27-1aa5-4046-86b6-fa64d75059ce"
 }
 ```
 
