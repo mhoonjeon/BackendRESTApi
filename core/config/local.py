@@ -16,7 +16,7 @@ class Local(Common):
         '--nologcapture',
         '--with-coverage',
         '--with-progressive',
-        '--cover-package=BackendRESTApi'
+        '--cover-package=charts, patients'
     ]
 
     # Mail
@@ -31,4 +31,4 @@ class Local(Common):
     )
     ADMIN_USERNAME = 'admin'
     ADMIN_EMAIL = 'admin@mediscri.com'
-    ADMIN_INITIAL_PASSWORD = 'admin' # To be changed after first login by admin
+    ADMIN_INITIAL_PASSWORD = 'admin'  # To be changed after first login

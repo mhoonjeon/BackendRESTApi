@@ -32,6 +32,7 @@ class GetAdmissionChartSerializer(serializers.ModelSerializer):
     progress_charts = GetProgressChartSerializer(many=True)
     created = serializers.DateTimeField(format="%Y년 %m월 %d일")
     modified = serializers.DateTimeField(format="%Y년 %m월 %d일")
+    progress_charts = GetProgressChartSerializer(required=False, many=True)
 
     class Meta:
         model = AdmissionChart
