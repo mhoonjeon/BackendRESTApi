@@ -2,7 +2,10 @@ import pytz
 
 import factory
 
+from django.utils.text import slugify
+
 from ..models import Article, Comment, Tag
+from profiles.test.factories import ProfileFactory
 from patients.test.factories import PatientFactory
 
 
@@ -12,33 +15,48 @@ class ArticleFactory(factory.django.DjangoModelFactory):
         model = Article
 
     id = factory.Faker('uuid4')
-    slug = factory.Faker('slug')
-    title = factory.Faker('title')
+    title = factory.Faker('sentence')
     description = factory.Faker('text')
     body = factory.Faker('text')
     created = factory.Faker('date_time', tzinfo=pytz.utc)
     modified = factory.Faker('date_time', tzinfo=pytz.utc)
 
-    author = factory
+    author = factory.SubFactory(ProfileFactory)
+    patient = factory.SubFactory(PatientFactory)
 
-class AdmissionChartFactory(factory.django.DjangoModelFactory):
+    @factory.post_generation
+    def tags(self, created, extracted, **kwargs):
+        if not created:
+            # Simple build, do nothing.
+            return
+
+        if extracted:
+            # A list of groups were passed in, use them
+            for tag in extracted:
+                self.tags.add(tag)
+
+
+class CommentFactory(factory.django.DjangoModelFactory):
 
     class Meta:
-        model = AdmissionChart
+        model = Comment
 
     id = factory.Faker('uuid4')
-    patient = factory.SubFactory(PatientFactory)
-    cc = factory.Faker('text')
-    pi = factory.Faker('text')
-    pmhx = factory.Faker('text')
-    psxhx = factory.Faker('text')
-    fhx = factory.Faker('text')
-    shx = factory.Faker('text')
-    medications = factory.Faker('text')
-    ros = factory.Faker('text')
-    pe = factory.Faker('text')
-    labs = factory.Faker('text')
-    dx = factory.Faker('text')
-    plan = factory.Faker('text')
+    article = factory.SubFactory(ArticleFactory)
+    author = factory.SubFactory(ProfileFactory)
+    body = factory.Faker('text')
+
+    created = factory.Faker('date_time', tzinfo=pytz.utc)
+    modified = factory.Faker('date_time', tzinfo=pytz.utc)
+
+
+class TagFactory(factory.django.DjangoModelFactory):
+
+    class Meta:
+        model = Tag
+
+    id = factory.Faker('uuid4')
+    tag = factory.Faker('word')
+
     created = factory.Faker('date_time', tzinfo=pytz.utc)
     modified = factory.Faker('date_time', tzinfo=pytz.utc)

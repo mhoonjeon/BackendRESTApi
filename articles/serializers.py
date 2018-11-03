@@ -9,7 +9,6 @@ from .relations import TagRelatedField
 class ArticleSerializer(serializers.ModelSerializer):
     author = ProfileSerializer(read_only=True)
     description = serializers.CharField(required=False)
-    slug = serializers.SlugField(required=False)
 
     favorited = serializers.SerializerMethodField()
     favoritesCount = serializers.SerializerMethodField(
@@ -30,7 +29,6 @@ class ArticleSerializer(serializers.ModelSerializer):
             'description',
             'favorited',
             'favoritesCount',
-            'slug',
             'tagList',
             'title',
             'modified',

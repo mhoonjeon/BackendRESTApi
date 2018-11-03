@@ -1,88 +1,80 @@
+import pytz
+import factory
+
 from django.test import TestCase
 from django.forms.models import model_to_dict
 from nose.tools import eq_, ok_
 
 from core.utils import to_dict
-from .factories import AdmissionChartFactory, ProgressChartFactory
+from .factories import ArticleFactory, CommentFactory, TagFactory
+from ..models import Tag
 from ..serializers import (
-    CreateAdmissionChartSerializer, CreateProgressChartSerializer,
-    GetAdmissionChartSerializer, GetProgressChartSerializer
+    ArticleSerializer, CommentSerializer, TagSerializer
 )
+from profiles.test.factories import ProfileFactory
+from profiles.serializers import ProfileSerializer
+from patients.test.factories import PatientFactory
 
 
-class TestCreateAdmissionChartSerializer(TestCase):
+# class TestArticleSerializer(TestCase):
+
+    # def setUp(self):
+        # tag1 = Tag.objects.create(tag='surgery')
+        # tag2 = Tag.objects.create(tag='os')
+        # profile = ProfileFactory.create()
+        # patient = PatientFactory.create()
+
+        # self._article = ArticleFactory.create(
+                # tags=(tag1, tag2), author=profile, patient=patient
+            # )
+
+        # self._article_data = model_to_dict(
+            # ArticleFactory.create(
+                # tags=(tag1, tag2), author=profile, patient=patient
+            # )
+        # )
+        # self._article_data['created'] = self._article.created
+        # self._article_data['modified'] = self._article.modified
+
+    # def test_serializer_with_empty_data(self):
+        # serializer = ArticleSerializer(data={})
+        # eq_(serializer.is_valid(), False)
+
+    # def test_serializer_with_valid_data(self):
+        # serializer = ArticleSerializer(data=self._article_data)
+        # ok_(serializer.is_valid())
+
+
+# class TestCommentSerializer(TestCase):
+
+    # def setUp(self):
+        # self._comment_data = to_dict(
+            # CommentFactory.build()
+        # )
+
+    # def test_serializer_with_empty_data(self):
+        # serializer = CommentSerializer(data={})
+        # eq_(serializer.is_valid(), False)
+
+    # def test_serializer_with_valid_data(self):
+        # author = ProfileFactory.create()
+        # self._comment_data['author'] = ProfileSerializer(author).data
+        # serializer = CommentSerializer(data=self._comment_data)
+        # ok_(serializer.is_valid())
+
+
+class TestTagSerializer(TestCase):
 
     def setUp(self):
-        self.chart_data = model_to_dict(AdmissionChartFactory.create())
-
-    def test_serializer_with_empty_data(self):
-        serializer = CreateAdmissionChartSerializer(data={})
-        eq_(serializer.is_valid(), False)
-
-    def test_serializer_with_valid_data(self):
-        serializer = CreateAdmissionChartSerializer(data=self.chart_data)
-        ok_(serializer.is_valid())
-
-
-class TestCreateProgressChartSerializer(TestCase):
-
-    def setUp(self):
-        admission_chart = AdmissionChartFactory.create()
-        self.chart_data = model_to_dict(
-            ProgressChartFactory.create(admission_chart=admission_chart)
+        self._tag_data = to_dict(
+            TagFactory.build()
         )
 
     def test_serializer_with_empty_data(self):
-        serializer = CreateProgressChartSerializer(data={})
+        serializer = TagSerializer(data={})
         eq_(serializer.is_valid(), False)
 
     def test_serializer_with_valid_data(self):
-        serializer = CreateProgressChartSerializer(data=self.chart_data)
+        serializer = TagSerializer(data=self._tag_data)
         ok_(serializer.is_valid())
 
-
-class TestGetAdmissionChartSerializer(TestCase):
-
-    def setUp(self):
-        self.chart_data = model_to_dict(AdmissionChartFactory.build())
-
-    def test_serializer_with_empty_data(self):
-        serializer = GetAdmissionChartSerializer(data={})
-        eq_(serializer.is_valid(), False)
-
-    def test_serializer_with_valid_data_without_progress_charts(self):
-        admission_chart = to_dict(AdmissionChartFactory.build())
-        serializer = GetAdmissionChartSerializer(data=admission_chart)
-        ok_(serializer.is_valid())
-
-    def test_serializer_with_valid_data_with_progress_charts(self):
-        admission_chart = AdmissionChartFactory.create()
-        ProgressChartFactory.create_batch(
-            size=3, admission_chart=admission_chart
-        )
-
-        admission_chart_data = to_dict(admission_chart)
-        admission_chart_data['progress_charts'] = CreateProgressChartSerializer(
-            admission_chart.progress_charts.all(),
-            many=True
-        ).data
-        serializer = GetAdmissionChartSerializer(data=admission_chart_data)
-        ok_(serializer.is_valid())
-        eq_(len(serializer.data['progress_charts']), 3)
-
-
-class TestGetProgressChartSerializer(TestCase):
-
-    def setUp(self):
-        admission_chart = AdmissionChartFactory.create()
-        self.chart_data = to_dict(
-            ProgressChartFactory.build(admission_chart=admission_chart)
-        )
-
-    def test_serializer_with_empty_data(self):
-        serializer = GetProgressChartSerializer(data={})
-        eq_(serializer.is_valid(), False)
-
-    def test_serializer_with_valid_data(self):
-        serializer = GetProgressChartSerializer(data=self.chart_data)
-        ok_(serializer.is_valid())

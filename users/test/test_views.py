@@ -6,7 +6,7 @@ from rest_framework.test import APITestCase
 from rest_framework import status
 from faker import Faker
 from ..models import User
-from .factories import UserFactory
+from .factories import UserFactory, UserFactoryForAuth
 
 fake = Faker()
 
@@ -39,7 +39,7 @@ class TestUserDetailTestCase(APITestCase):
     """
 
     def setUp(self):
-        self.user = UserFactory()
+        self.user = UserFactoryForAuth()
         self.url = reverse('user-detail', kwargs={'pk': self.user.pk})
         self.client.credentials(HTTP_AUTHORIZATION=f'Token {self.user.auth_token}')
 

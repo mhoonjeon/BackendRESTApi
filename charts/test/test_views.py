@@ -44,15 +44,16 @@ class TestChartViewSetTestCase(APITestCase):
         eq_(response.status_code, status.HTTP_400_BAD_REQUEST)
 
     def test_post_request_with_valid_data_succeeds(self):
-        patient = PatientFactory.create()
+        patient = PatientFactory.build()
         chart_data = model_to_dict(
-            AdmissionChartFactory.build(patient=patient)
+            AdmissionChartFactory.build()
         )
-        response = self.client.post(self.url, chart_data)
+        chart_data['patient'] = model_to_dict(patient)
+        response = self.client.post(self.url, chart_data, format='json')
         eq_(response.status_code, status.HTTP_201_CREATED)
 
         chart = AdmissionChart.objects.get(pk=response.data.get('id'))
-        eq_(str(chart.patient.id), chart_data.get('patient'))
+        eq_(chart.patient.name, patient.name)
 
 
 class TestProgressChartViewSetTestCase(APITestCase):

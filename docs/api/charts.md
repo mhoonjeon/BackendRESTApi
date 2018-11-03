@@ -15,7 +15,6 @@ Authorization: Token 9944b09199c62bcf9418ad846dd0e4bbdfc6ee4b
         "gender": 0,  // 0: 남자, 1: 여자
         "age": 23
     },
-	"patient": "9ea88e27-1aa5-4046-86b6-fa64d75059ce",
     "cc": "복통",
     "pi": "내원 3일전부터 속이 쓰리고 배가 아파옴",
     "pmhx": "당뇨, 고혈압, 3년 전 췌장염",

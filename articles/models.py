@@ -7,7 +7,6 @@ from model_utils.models import TimeStampedModel
 
 class Article(TimeStampedModel):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    slug = models.SlugField(db_index=True, max_length=255, unique=True)
     title = models.CharField(db_index=True, max_length=255)
 
     description = models.TextField()
@@ -18,7 +17,12 @@ class Article(TimeStampedModel):
     )
 
     tags = models.ManyToManyField(
-        'articles.Tag', related_name='articles'
+        'articles.Tag', related_name='articles', null=True
+    )
+
+    patient = models.ForeignKey(
+        'patients.Patient', on_delete=models.CASCADE, related_name='articles',
+        null=True
     )
 
     def __str__(self):
@@ -47,7 +51,6 @@ class Comment(TimeStampedModel):
 class Tag(TimeStampedModel):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     tag = models.CharField(max_length=255)
-    slug = models.SlugField(db_index=True, unique=True)
 
     class Meta:
         ordering = ['-created', '-modified']

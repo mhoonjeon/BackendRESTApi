@@ -8,6 +8,7 @@ from ..serializers import (
     CreateAdmissionChartSerializer, CreateProgressChartSerializer,
     GetAdmissionChartSerializer, GetProgressChartSerializer
 )
+from patients.test.factories import PatientFactory
 
 
 class TestCreateAdmissionChartSerializer(TestCase):
@@ -20,6 +21,8 @@ class TestCreateAdmissionChartSerializer(TestCase):
         eq_(serializer.is_valid(), False)
 
     def test_serializer_with_valid_data(self):
+        patient = PatientFactory.build()
+        self.chart_data['patient'] = model_to_dict(patient)
         serializer = CreateAdmissionChartSerializer(data=self.chart_data)
         ok_(serializer.is_valid())
 
