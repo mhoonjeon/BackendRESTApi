@@ -18,8 +18,8 @@ class ArticleSerializer(serializers.ModelSerializer):
 
     tagList = TagRelatedField(many=True, required=False, source='tags')
 
-    created = serializers.SerializerMethodField(method_name='get_created')
-    modified = serializers.SerializerMethodField(method_name='get_modified')
+    created = serializers.DateTimeField(format="%Y년 %m월 %d일")
+    modified = serializers.DateTimeField(format="%Y년 %m월 %d일")
 
     class Meta:
         model = Article
@@ -48,9 +48,6 @@ class ArticleSerializer(serializers.ModelSerializer):
 
         return article
 
-    def get_created(self, instance):
-        return instance.created.isoformat()
-
     def get_favorited(self, instance):
         request = self.context.get('request', None)
 
@@ -65,15 +62,12 @@ class ArticleSerializer(serializers.ModelSerializer):
     def get_favorites_count(self, instance):
         return instance.favorited_by.count()
 
-    def get_modified(self, instance):
-        return instance.modified.isoformat()
-
 
 class CommentSerializer(serializers.ModelSerializer):
     author = ProfileSerializer(required=False)
 
-    created = serializers.SerializerMethodField(method_name='get_created')
-    modified = serializers.SerializerMethodField(method_name='get_modified')
+    created = serializers.DateTimeField(format="%Y년 %m월 %d일")
+    modified = serializers.DateTimeField(format="%Y년 %m월 %d일")
 
     class Meta:
         model = Comment
@@ -92,12 +86,6 @@ class CommentSerializer(serializers.ModelSerializer):
         return Comment.objects.create(
             author=author, article=article, **validated_data
         )
-
-    def get_created(self, instance):
-        return instance.created.isoformat()
-
-    def get_modified(self, instance):
-        return instance.modified.isoformat()
 
 
 class TagSerializer(serializers.ModelSerializer):

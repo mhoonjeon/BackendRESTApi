@@ -1,9 +1,12 @@
+import uuid
+
 from django.db import models
 
 from model_utils.models import TimeStampedModel
 
 
 class Article(TimeStampedModel):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     slug = models.SlugField(db_index=True, max_length=255, unique=True)
     title = models.CharField(db_index=True, max_length=255)
 
@@ -26,6 +29,7 @@ class Article(TimeStampedModel):
 
 
 class Comment(TimeStampedModel):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     body = models.TextField()
 
     article = models.ForeignKey(
@@ -41,6 +45,7 @@ class Comment(TimeStampedModel):
 
 
 class Tag(TimeStampedModel):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     tag = models.CharField(max_length=255)
     slug = models.SlugField(db_index=True, unique=True)
 

@@ -1,9 +1,12 @@
+import uuid
+
 from model_utils.models import TimeStampedModel
 
 from django.db import models
 
 
 class Profile(TimeStampedModel):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     user = models.OneToOneField(
         'users.User', on_delete=models.CASCADE
     )
