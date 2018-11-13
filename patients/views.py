@@ -8,6 +8,7 @@ from .serializers import PatientSerializer, CreatePatientSerializer
 class PatientViewSet(mixins.CreateModelMixin,
                      mixins.ListModelMixin,
                      mixins.RetrieveModelMixin,
+                     mixins.UpdateModelMixin,
                      viewsets.GenericViewSet):
 
     queryset = Patient.objects.all()
