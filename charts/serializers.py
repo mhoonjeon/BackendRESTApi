@@ -1,11 +1,11 @@
 from rest_framework import serializers
 from .models import AdmissionChart, ProgressChart
 from patients.models import Patient
-from patients.serializers import PatientSerializer, CreatePatientSerializer
+from patients.serializers import PatientSerializer
 
 
 class CreateAdmissionChartSerializer(serializers.ModelSerializer):
-    patient = CreatePatientSerializer()
+    patient = PatientSerializer()
 
     class Meta:
         model = AdmissionChart
