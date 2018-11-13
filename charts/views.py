@@ -44,6 +44,8 @@ class ChartViewSet(mixins.ListModelMixin,
 
 class ProgressChartViewSet(mixins.ListModelMixin,
                            mixins.CreateModelMixin,
+                           mixins.UpdateModelMixin,
+                           mixins.RetrieveModelMixin,
                            viewsets.GenericViewSet):
 
     queryset = ProgressChart.objects.all()
@@ -51,6 +53,6 @@ class ProgressChartViewSet(mixins.ListModelMixin,
     permission_classes = (IsAuthenticated, )
 
     def get_serializer_class(self):
-        if self.action == 'create':
+        if self.action == 'create' or self.action == 'update':
             return CreateProgressChartSerializer
         return super().get_serializer_class()
