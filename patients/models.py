@@ -12,8 +12,10 @@ class Patient(TimeStampedModel):
 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=255)
-    gender = models.BooleanField(choices=GENDER, default=MALE)
-    age = models.PositiveSmallIntegerField()
+    gender = models.NullBooleanField(
+        choices=GENDER, default=MALE, blank=True, null=True
+    )
+    age = models.PositiveSmallIntegerField(blank=True, null=True)
 
     class Meta:
         ordering = ['-id']
