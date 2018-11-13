@@ -1,4 +1,3 @@
-from model_utils import Choices
 from model_utils.models import TimeStampedModel
 import uuid
 
