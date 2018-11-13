@@ -19,6 +19,20 @@ class CreateAdmissionChartSerializer(serializers.ModelSerializer):
 
         return admission_chart
 
+    def update(self, instance, validated_data):
+        patient_data = validated_data.pop('patient')
+        patient = instance.patient
+
+        instance.note = validated_data.get('note', instance.note)
+        instance.save()
+
+        patient.name = patient_data.get('name', patient.name)
+        patient.gender = patient_data.get('gender', patient.gender)
+        patient.age = patient_data.get('age', patient.age)
+
+        patient.save()
+
+        return instance
 
 class CreateProgressChartSerializer(serializers.ModelSerializer):
 

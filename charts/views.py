@@ -1,7 +1,6 @@
 from datetime import date
 from django_filters import rest_framework as filters
-from rest_framework import generics, viewsets, mixins
-from rest_framework.decorators import action
+from rest_framework import viewsets, mixins
 from rest_framework.permissions import IsAuthenticated
 
 from .models import AdmissionChart, ProgressChart
@@ -10,14 +9,15 @@ from .serializers import (
     CreateProgressChartSerializer, GetProgressChartSerializer
 )
 
-def created_today( queryset, name, value):
-    if value == True:
+
+def created_today(queryset, name, value):
+    if value:
         return queryset.filter(created__date=date.today())
 
 
 class ChartFilter(filters.FilterSet):
     created_today = filters.BooleanFilter(field_name='created__date',
-                                           method=created_today)
+                                          method=created_today)
 
     class Meta:
         model = AdmissionChart
@@ -26,6 +26,8 @@ class ChartFilter(filters.FilterSet):
 
 class ChartViewSet(mixins.ListModelMixin,
                    mixins.CreateModelMixin,
+                   mixins.UpdateModelMixin,
+                   mixins.RetrieveModelMixin,
                    viewsets.GenericViewSet):
 
     queryset = AdmissionChart.objects.all()
@@ -35,7 +37,7 @@ class ChartViewSet(mixins.ListModelMixin,
     filterset_class = ChartFilter
 
     def get_serializer_class(self):
-        if self.action == 'create':
+        if self.action == 'create' or self.action == 'update':
             return CreateAdmissionChartSerializer
         return super().get_serializer_class()
 
