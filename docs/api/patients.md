@@ -25,7 +25,7 @@ Content-Type application/json
 {
     "id": "404b9569-f3f2-4062-bbf8-33274f11fc24",
     "name": "류현진",
-    "gender": 0,  // 0은 남자, 1은 여자 Get에서는 male, female로 표시됨
+    "gender": "male",
     "age": 27
 }
 ```
