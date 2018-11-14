@@ -13,7 +13,7 @@ class CreateAdmissionChartSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         patient_data = validated_data.pop('patient')
-        patient = Patient.objects.create(**patient_data)
+        patient = Patient.objects.get_or_create(**patient_data)
 
         admission_chart = AdmissionChart.objects.create(patient=patient, **validated_data)
 

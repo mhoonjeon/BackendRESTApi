@@ -15,18 +15,14 @@ Authorization: Token 9944b09199c62bcf9418ad846dd0e4bbdfc6ee4b
         "gender": 0,  // 0: 남자, 1: 여자
         "age": 23
     },
-    "cc": "복통",
-    "pi": "내원 3일전부터 속이 쓰리고 배가 아파옴",
-    "pmhx": "당뇨, 고혈압, 3년 전 췌장염",
-    "psxhx": "수술한 적 없음",
-    "fhx": "어머니 위암",
-    "shx": "술, 담배 안함, 직업: 무직",
-    "medications": "고혈압, 당뇨 약 복용 중",
-    "ros": "배가 살살 아프고 하복부 통증",
-    "pe": "rebound tenderness, 배꼽 주위 압통",
-    "labs": "AST, ALT 상승",
-    "dx": "r/o 충수돌기염",
-    "plan": "복부초음파"
+    "note": {
+        "object": "value",
+        "document": {
+            "data": {},
+            "nodes": [],
+            "object": "document"
+        }
+    }
 }
 ```
 
@@ -61,20 +57,16 @@ Content-Type application/json
         "gender": 0,
         "age": 23
     },
+    "note": {
+        "object": "value",
+        "document": {
+            "data": {},
+            "nodes": [],
+            "object": "document"
+        }
+    }
     "created": "2018-10-31T13:56:38+0000",
     "modified": "2018-10-31T13:56:38+0000",
-    "cc": "복통",
-    "pi": "내원 3일전부터 속이 쓰리고 배가 아파옴",
-    "pmhx": "당뇨, 고혈압, 3년 전 췌장염",
-    "psxhx": "수술한 적 없음",
-    "fhx": "어머니 위암",
-    "shx": "술, 담배 안함, 직업: 무직",
-    "medications": "고혈압, 당뇨 약 복용 중",
-    "ros": "배가 살살 아프고 하복부 통증",
-    "pe": "rebound tenderness, 배꼽 주위 압통",
-    "labs": "AST, ALT 상승",
-    "dx": "r/o 충수돌기염",
-    "plan": "복부초음파",
 }
 ```
 
@@ -110,21 +102,17 @@ Content-Type application/json
                 "gender": "male",
                 "age": 23
             },
+            "note": {
+                "object": "value",
+                "document": {
+                    "data": {},
+                    "nodes": [],
+                    "object": "document"
+                }
+            }
             "progress_charts": [],
             "created": "2018년 10월 31일",
             "modified": "2018년 10월 31일",
-            "cc": "복통",
-            "pi": "내원 3일전부터 속이 쓰리고 배가 아파옴",
-            "pmhx": "당뇨, 고혈압, 3년 전 췌장염",
-            "psxhx": "수술한 적 없음",
-            "fhx": "어머니 위암",
-            "shx": "술, 담배 안함, 직업: 무직",
-            "medications": "고혈압, 당뇨 약 복용 중",
-            "ros": "배가 살살 아프고 하복부 통증",
-            "pe": "rebound tenderness, 배꼽 주위 압통",
-            "labs": "AST, ALT 상승",
-            "dx": "r/o 충수돌기염",
-            "plan": "복부초음파"
         },
         {
             "id": "89b22c32-ee98-4548-ab9e-df3fe215a59d",
@@ -134,32 +122,31 @@ Content-Type application/json
                 "gender": "male",
                 "age": 23
             },
+                "note": {
+                    "object": "value",
+                "document": {
+                    "data": {},
+                    "nodes": [],
+                    "object": "document"
+                }
+            }
             "progress_charts": [
                 {
                     "id": "ecd02b79-dc47-441e-941f-02b179cd3039",
                     "created": "2018년 10월 31일",
                     "modified": "2018년 10월 31일",
-                    "subjective": "나아짐",
-                    "objective": "좋아진듯",
-                    "assessment": "복통",
-                    "plan": "침치료",
+                    "note": {
+                        "object": "value",
+                        "document": {
+                            "data": {},
+                            "nodes": [],
+                            "object": "document"
+                    }
                     "admission_chart": "89b22c32-ee98-4548-ab9e-df3fe215a59d"
                 }
             ],
             "created": "2018년 10월 31일",
             "modified": "2018년 10월 31일",
-            "cc": "배가 아파요",
-            "pi": "",
-            "pmhx": "",
-            "psxhx": "",
-            "fhx": "",
-            "shx": "",
-            "medications": "",
-            "ros": "",
-            "pe": "",
-            "labs": "",
-            "dx": "",
-            "plan": ""
         }
     ]
 }

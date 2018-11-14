@@ -10,10 +10,14 @@ Content-Type application/json
 Authorization: Token 9944b09199c62bcf9418ad846dd0e4bbdfc6ee4b
 
 {
-    "subjective": "전날에 비해 호전된거 같아요",
-    "objective": "AST 200",
-    "assessment": "r/o 간염",
-    "plan": "항바이러스제 투여",
+    "note": {
+        "object": "value",
+        "document": {
+            "data": {},
+            "nodes": [],
+            "object": "document"
+        }
+    }
     "admission_chart": "89b22c32-ee98-4548-ab9e-df3fe215a59d"
 }
 ```
@@ -38,10 +42,14 @@ Content-Type application/json
     "id": "8f9f251b-cf1b-40c6-989c-0b6959a79f97",
     "created": "2018-10-31T14:01:52+0000",
     "modified": "2018-10-31T14:01:52+0000",
-    "subjective": "전날에 비해 호전된거 같아요",
-    "objective": "AST 200",
-    "assessment": "r/o 간염",
-    "plan": "항바이러스제 투여",
+    "note": {
+        "object": "value",
+        "document": {
+            "data": {},
+            "nodes": [],
+            "object": "document"
+        }
+    }
     "admission_chart": "89b22c32-ee98-4548-ab9e-df3fe215a59d"
 }
 ```
@@ -71,22 +79,30 @@ Content-Type application/json
     "results": [
         {
             "id": "8f9f251b-cf1b-40c6-989c-0b6959a79f97",
+            "note": {
+                "object": "value",
+                "document": {
+                    "data": {},
+                    "nodes": [],
+                    "object": "document"
+                    }
+            }
             "created": "2018년 10월 31일",
             "modified": "2018년 10월 31일",
-            "subjective": "전날에 비해 호전된거 같아요",
-            "objective": "AST 200",
-            "assessment": "r/o 간염",
-            "plan": "항바이러스제 투여",
             "admission_chart": "89b22c32-ee98-4548-ab9e-df3fe215a59d"
         },
         {
             "id": "ecd02b79-dc47-441e-941f-02b179cd3039",
+            "note": {
+                "object": "value",
+                "document": {
+                    "data": {},
+                    "nodes": [],
+                    "object": "document"
+                    }
+            }
             "created": "2018년 10월 31일",
             "modified": "2018년 10월 31일",
-            "subjective": "나아짐",
-            "objective": "좋아진듯",
-            "assessment": "복통",
-            "plan": "침치료",
             "admission_chart": "89b22c32-ee98-4548-ab9e-df3fe215a59d"
         }
     ]
