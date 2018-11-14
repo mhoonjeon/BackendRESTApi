@@ -26,11 +26,14 @@ class CreateAdmissionChartSerializer(serializers.ModelSerializer):
         instance.note = validated_data.get('note', instance.note)
         instance.save()
 
-        patient.name = patient_data.get('name', patient.name)
-        patient.gender = patient_data.get('gender', patient.gender)
-        patient.age = patient_data.get('age', patient.age)
+        patient = Patient.objects.get_or_create(**patient_data)
 
-        patient.save()
+        if not patient:
+            patient.name = patient_data.get('name', patient.name)
+            patient.gender = patient_data.get('gender', patient.gender)
+            patient.age = patient_data.get('age', patient.age)
+
+            patient.save()
 
         return instance
 
