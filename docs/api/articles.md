@@ -148,3 +148,44 @@ Content-Type application/json
     ]
 }
 ```
+
+## 질문 detail 가져오기
+
+**Request**:
+
+`GET` `api/v1/articles/:slug`
+```json
+Content-Type application/json
+Authorization: Token 9944b09199c62bcf9418ad846dd0e4bbdfc6ee4b
+```
+
+**Response**:
+
+```json
+HTTP 200 OK
+Allow: GET, PUT, HEAD, OPTIONS
+Content-Type: application/json
+Vary: Accept
+
+{
+    "author": {
+        "username": "admin",
+        "bio": "",
+        "image": "https://static.productionready.io/images/smiley-cyrus.jpg",
+        "following": false
+    },
+    "body": "57세 남자 환자가 오늘 내원해서 5달간 지속된 황달과 피로 증상을 호소하는데요, 어떤 처방을 주면 좋을까요??",
+    "created": "7 minutes ago",
+    "description": "황달 환자 처방 최신 경향",
+    "favorited": false,
+    "favoritesCount": 0,
+    "slug": "-a1xnnn",
+    "tagList": [
+        "소화기내과",
+        "암",
+        "췌장"
+    ],
+    "title": "황달있는 환자에게 뭘 처방해야 하나요?",
+    "modified": "7 minutes ago"
+}
+```

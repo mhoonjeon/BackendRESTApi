@@ -8,13 +8,13 @@ from .views import (
 urlpatterns = [
     path('articles/feed/', ArticlesFeedAPIView.as_view()),
 
-    path('articles/<str:article_slug>)/favorite/',
+    path('articles/<slug:article_slug>/favorite/',
         ArticlesFavoriteAPIView.as_view()),
 
-    path('articles/<str:article_slug>)/comments/',
+    path('articles/<slug:article_slug>/comments/',
         CommentsListCreateAPIView.as_view()),
 
-    path('articles/<str:article_slug>)/comments/<int:comment_pk>/',
+    path('articles/<slug:article_slug>/comments/<int:comment_pk>/',
         CommentsDestroyAPIView.as_view()),
 
     path('tags/', TagListAPIView.as_view()),

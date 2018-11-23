@@ -20,16 +20,16 @@ router.register(r'charts', ChartViewSet)
 router.register(r'progress_charts', ProgressChartViewSet)
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('api/v1/', include(router.urls)),
-    path('api-token-auth/', views.obtain_auth_token),
-    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-
     # Article 관련
     path('api/v1/', include("articles.urls")),
 
     # Profile 관련
     path('api/v1/', include("profiles.urls")),
+
+    path('admin/', admin.site.urls),
+    path('api/v1/', include(router.urls)),
+    path('api-token-auth/', views.obtain_auth_token),
+    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 
     # the 'api-root' from django rest-frameworks default router
     # http://www.django-rest-framework.org/api-guide/routers/#defaultrouter

@@ -69,8 +69,8 @@ class ArticleSerializer(serializers.ModelSerializer):
 class CommentSerializer(serializers.ModelSerializer):
     author = ProfileSerializer(required=False)
 
-    created = serializers.DateTimeField(format="%Y년 %m월 %d일")
-    modified = serializers.DateTimeField(format="%Y년 %m월 %d일")
+    created = HumanizedCreatedSinceField(required=False)
+    modified = HumanizedModifiedSinceField(required=False)
 
     class Meta:
         model = Comment

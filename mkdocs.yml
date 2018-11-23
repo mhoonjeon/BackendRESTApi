@@ -14,3 +14,5 @@ pages:
     - Progress_charts: 'api/progress_charts.md'
     - Patients: 'api/patients.md'
     - Articles(=Questions): 'api/articles.md'
+    - Comments: 'api/comments.md'
+    - Tags: 'api/tags.md'
