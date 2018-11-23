@@ -77,73 +77,120 @@ Authorization: Token 9944b09199c62bcf9418ad846dd0e4bbdfc6ee4b
 **Response**:
 
 ```json
-
-Content-Type application/json
-200 OK
+HTTP 200 OK
+Allow: GET, POST, HEAD, OPTIONS
+Content-Type: application/json
+Vary: Accept
 
 {
-    "count": 2,
+    "count": 5,
     "next": null,
-    "previous": null,
+    "previous": "http://localhost:8000/api/v1/articles/",
     "results": [
         {
-            "id": "8bd53fdf-99ae-4bcb-ba3e-218f2b89c4a1",
-            "patient": {
-                "id": "9ea88e27-1aa5-4046-86b6-fa64d75059ce",
-                "name": "전명훈",
-                "gender": "male",
-                "age": 23
+            "author": {
+                "username": "admin",
+                "bio": "",
+                "image": "https://static.productionready.io/images/smiley-cyrus.jpg",
+                "following": false
             },
-            "progress_charts": [],
-            "created": "2018년 10월 31일",
-            "modified": "2018년 10월 31일",
-            "cc": "복통",
-            "pi": "내원 3일전부터 속이 쓰리고 배가 아파옴",
-            "pmhx": "당뇨, 고혈압, 3년 전 췌장염",
-            "psxhx": "수술한 적 없음",
-            "fhx": "어머니 위암",
-            "shx": "술, 담배 안함, 직업: 무직",
-            "medications": "고혈압, 당뇨 약 복용 중",
-            "ros": "배가 살살 아프고 하복부 통증",
-            "pe": "rebound tenderness, 배꼽 주위 압통",
-            "labs": "AST, ALT 상승",
-            "dx": "r/o 충수돌기염",
-            "plan": "복부초음파"
+            "body": "57세 남자 환자가 오늘 내원해서 5달간 지속된 황달과 피로 증상을 호소하는데요, 어떤 처방을 주면 좋을까요??",
+            "created": "43 minutes ago",
+            "description": "황달 환자 처방 최신 경향",
+            "favorited": false,
+            "favoritesCount": 0,
+            "slug": "-30p7rp",
+            "tagList": [
+                "소화기내과",
+                "암",
+                "췌장"
+            ],
+            "title": "황달있는 환자에게 뭘 처방해야 하나요?",
+            "modified": "43 minutes ago"
         },
         {
-            "id": "89b22c32-ee98-4548-ab9e-df3fe215a59d",
-            "patient": {
-                "id": "9ea88e27-1aa5-4046-86b6-fa64d75059ce",
-                "name": "전명훈",
-                "gender": "male",
-                "age": 23
+            "author": {
+                "username": "admin",
+                "bio": "",
+                "image": "https://static.productionready.io/images/smiley-cyrus.jpg",
+                "following": false
             },
-            "progress_charts": [
-                {
-                    "id": "ecd02b79-dc47-441e-941f-02b179cd3039",
-                    "created": "2018년 10월 31일",
-                    "modified": "2018년 10월 31일",
-                    "subjective": "나아짐",
-                    "objective": "좋아진듯",
-                    "assessment": "복통",
-                    "plan": "침치료",
-                    "admission_chart": "89b22c32-ee98-4548-ab9e-df3fe215a59d"
-                }
+            "body": "57세 남자 환자가 오늘 내원해서 5달간 지속된 황달과 피로 증상을 호소하는데요, 어떤 처방을 주면 좋을까요??",
+            "created": "43 minutes ago",
+            "description": "황달 환자 처방 최신 경향",
+            "favorited": false,
+            "favoritesCount": 0,
+            "slug": "-d9nxwv",
+            "tagList": [
+                "소화기내과",
+                "암",
+                "췌장"
             ],
-            "created": "2018년 10월 31일",
-            "modified": "2018년 10월 31일",
-            "cc": "배가 아파요",
-            "pi": "",
-            "pmhx": "",
-            "psxhx": "",
-            "fhx": "",
-            "shx": "",
-            "medications": "",
-            "ros": "",
-            "pe": "",
-            "labs": "",
-            "dx": "",
-            "plan": ""
+            "title": "황달있는 환자에게 뭘 처방해야 하나요?",
+            "modified": "43 minutes ago"
+        },
+        {
+            "author": {
+                "username": "admin",
+                "bio": "",
+                "image": "https://static.productionready.io/images/smiley-cyrus.jpg",
+                "following": false
+            },
+            "body": "57세 남자 환자가 오늘 내원해서 5달간 지속된 황달과 피로 증상을 호소하는데요, 어떤 처방을 주면 좋을까요??",
+            "created": "43 minutes ago",
+            "description": "황달 환자 처방 최신 경향",
+            "favorited": false,
+            "favoritesCount": 0,
+            "slug": "-fq05er",
+            "tagList": [
+                "소화기내과",
+                "암",
+                "췌장"
+            ],
+            "title": "황달있는 환자에게 뭘 처방해야 하나요?",
+            "modified": "43 minutes ago"
+        },
+        {
+            "author": {
+                "username": "admin",
+                "bio": "",
+                "image": "https://static.productionready.io/images/smiley-cyrus.jpg",
+                "following": false
+            },
+            "body": "57세 남자 환자가 오늘 내원해서 5달간 지속된 황달과 피로 증상을 호소하는데요, 어떤 처방을 주면 좋을까요??",
+            "created": "48 minutes ago",
+            "description": "황달 환자 처방 최신 경향",
+            "favorited": false,
+            "favoritesCount": 0,
+            "slug": "-jbn4qd",
+            "tagList": [
+                "소화기내과",
+                "암",
+                "췌장"
+            ],
+            "title": "황달있는 환자에게 뭘 처방해야 하나요?",
+            "modified": "48 minutes ago"
+        },
+        {
+            "author": {
+                "username": "admin",
+                "bio": "",
+                "image": "https://static.productionready.io/images/smiley-cyrus.jpg",
+                "following": false
+            },
+            "body": "A 57-year-old male patient came to my clinic today, complaing about jaundice and malaise that existed for the last 5 months. What kind of medication should I give him?",
+            "created": "53 minutes ago",
+            "description": "Dealing with patient with possible pancreatic head cancer",
+            "favorited": false,
+            "favoritesCount": 0,
+            "slug": "what-medication-should-i-prescribe-to-patient-with-jaundice-0adb2r",
+            "tagList": [
+                "Gastrointestinal",
+                "Cancer",
+                "Pancrease"
+            ],
+            "title": "What medication should I prescribe to patient with jaundice?",
+            "modified": "53 minutes ago"
         }
     ]
 }
