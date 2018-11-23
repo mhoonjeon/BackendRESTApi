@@ -19,6 +19,10 @@ class ArticleSerializer(serializers.ModelSerializer):
         method_name='get_favorites_count'
     )
 
+    commentsCount = serializers.SerializerMethodField(
+        method_name='get_comments_count'
+    )
+
     tagList = TagRelatedField(many=True, required=False, source='tags')
 
     created = HumanizedCreatedSinceField(required=False)
@@ -33,6 +37,7 @@ class ArticleSerializer(serializers.ModelSerializer):
             'description',
             'favorited',
             'favoritesCount',
+            'commentsCount',
             'slug',
             'tagList',
             'title',
@@ -64,6 +69,9 @@ class ArticleSerializer(serializers.ModelSerializer):
 
     def get_favorites_count(self, instance):
         return instance.favorited_by.count()
+
+    def get_comments_count(self, instance):
+        return instance.comments.count()
 
 
 class CommentSerializer(serializers.ModelSerializer):
