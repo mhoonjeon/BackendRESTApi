@@ -1,28 +1,21 @@
-# Charts
+# Articles(Questions)
 
-## 질문
+## 질문(article) 생성하기
 
 **Request**:
 
-`POST` `api/v1/charts/`
+`PtST` `api/v1/articles/`
 ```json
 Content-Type application/json
 Authorization: Token 9944b09199c62bcf9418ad846dd0e4bbdfc6ee4b
 
 {
-	"patient": "9ea88e27-1aa5-4046-86b6-fa64d75059ce",
-    "cc": "복통",
-    "pi": "내원 3일전부터 속이 쓰리고 배가 아파옴",
-    "pmhx": "당뇨, 고혈압, 3년 전 췌장염",
-    "psxhx": "수술한 적 없음",
-    "fhx": "어머니 위암",
-    "shx": "술, 담배 안함, 직업: 무직",
-    "medications": "고혈압, 당뇨 약 복용 중",
-    "ros": "배가 살살 아프고 하복부 통증",
-    "pe": "rebound tenderness, 배꼽 주위 압통",
-    "labs": "AST, ALT 상승",
-    "dx": "r/o 충수돌기염",
-    "plan": "복부초음파"
+  "article": {
+    "title": "What medication should I prescribe to patient with jaundice?",
+    "description": "Dealing with patient with possible pancreatic head cancer",
+    "body": "A 57-year-old male patient came to my clinic today, complaing about jaundice and malaise that existed for the last 5 months. What kind of medication should I give him?",
+    "tagList": ["Pancrease", "Cancer", "Gastrointestinal"]
+  }
 }
 ```
 
@@ -30,61 +23,61 @@ Authorization: Token 9944b09199c62bcf9418ad846dd0e4bbdfc6ee4b
 
 Name       | 설명      | 타입   | 필수 | 주의
 -----------|-----------|--------|------|------------
-patient    |           | string | Yes  | patient의 id
-cc         | 주소증    | string | No   | 
-pi         | 현병력    | string | No   | 
-pmhx       | 과거력    | string | No   | 
-psxhx      | 수술력    | string | No   | 
-fhx        | 가족력    | string | No   | 
-shx        | 사회력    | string | No   | 
-medications| 약물복용력| string | No   | 
-ros        | 환자호소  | string | No   | 
-pe         | 신체진찰  | string | No   | 
-dx         | 진단      | string | No   | 
-plan       | 계획      | string | No   | 
+title      | 제목      | string | Yes  |
+description| 요약?     | string | Yes  | 
+body       | 본문      | string | Yes  | 
+tagList    | 태그      |        | No   | 
 
 **Response**:
 
 ```json
-Content-Type application/json
-201 Created
+HTTP 201 Created
+Allow: GET, POST, HEAD, OPTIONS
+Content-Type: application/json
+Vary: Accept 
 
 {
-    "id": "8bd53fdf-99ae-4bcb-ba3e-218f2b89c4a1",
-    "created": "2018-10-31T13:56:38+0000",
-    "modified": "2018-10-31T13:56:38+0000",
-    "cc": "복통",
-    "pi": "내원 3일전부터 속이 쓰리고 배가 아파옴",
-    "pmhx": "당뇨, 고혈압, 3년 전 췌장염",
-    "psxhx": "수술한 적 없음",
-    "fhx": "어머니 위암",
-    "shx": "술, 담배 안함, 직업: 무직",
-    "medications": "고혈압, 당뇨 약 복용 중",
-    "ros": "배가 살살 아프고 하복부 통증",
-    "pe": "rebound tenderness, 배꼽 주위 압통",
-    "labs": "AST, ALT 상승",
-    "dx": "r/o 충수돌기염",
-    "plan": "복부초음파",
-    "patient": "9ea88e27-1aa5-4046-86b6-fa64d75059ce"
+    "author": {
+        "username": "admin",
+        "bio": "",
+        "image": "https://static.productionready.io/images/smiley-cyrus.jpg",
+        "following": false
+    },
+    "body": "A 57-year-old male patient came to my clinic today, complaing about jaundice and malaise that existed for the last 5 months. What kind of medication should I give him?",
+    "created": "now",
+    "description": "Dealing with patient with possible pancreatic head cancer",
+    "favorited": false,
+    "favoritesCount": 0,
+    "slug": "what-medication-should-i-prescribe-to-patient-with-jaundice-0adb2r",
+    "tagList": [
+        "Gastrointestinal",
+        "Cancer",
+        "Pancrease"
+    ],
+    "title": "What medication should I prescribe to patient with jaundice?",
+    "modified": "now"
 }
 ```
 
-## 초진차트 리스트 가져오기
+## 질문 리스트 가져오기
 
 **Request**:
 
-`GET` `api/v1/charts/`
+`GET` `api/v1/articles/`
 ```json
 Content-Type application/json
 Authorization: Token 9944b09199c62bcf9418ad846dd0e4bbdfc6ee4b
 ```
 **Query Parameter(선택사항)**:
 
-`GET` `api/v1/charts/?patient=<patient_id>`로 요청을 날리면 특정 환자의 차트만 필터링 해준다.
+* `GET` `api/v1/charts/?tag=Pancrease`: 태그로 필터링  
+* `GET` `api/v1/charts/?author=admin`:  작성자로 필터링  
+* `GET` `api/v1/charts/?favorited=admin`: 좋아요로 필터링 (좋아요 누른 사람의 feed 보여주기 위해)
 
 **Response**:
 
 ```json
+
 Content-Type application/json
 200 OK
 

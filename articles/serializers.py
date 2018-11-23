@@ -1,5 +1,8 @@
 from rest_framework import serializers
 
+from core.common.utils import (
+    HumanizedCreatedSinceField, HumanizedModifiedSinceField
+)
 from profiles.serializers import ProfileSerializer
 
 from .models import Article, Comment, Tag
@@ -9,6 +12,7 @@ from .relations import TagRelatedField
 class ArticleSerializer(serializers.ModelSerializer):
     author = ProfileSerializer(read_only=True)
     description = serializers.CharField(required=False)
+    slug = serializers.SlugField(required=False)
 
     favorited = serializers.SerializerMethodField()
     favoritesCount = serializers.SerializerMethodField(
@@ -17,8 +21,8 @@ class ArticleSerializer(serializers.ModelSerializer):
 
     tagList = TagRelatedField(many=True, required=False, source='tags')
 
-    created = serializers.DateTimeField(format="%Y년 %m월 %d일")
-    modified = serializers.DateTimeField(format="%Y년 %m월 %d일")
+    created = HumanizedCreatedSinceField(required=False)
+    modified = HumanizedModifiedSinceField(required=False)
 
     class Meta:
         model = Article
@@ -29,6 +33,7 @@ class ArticleSerializer(serializers.ModelSerializer):
             'description',
             'favorited',
             'favoritesCount',
+            'slug',
             'tagList',
             'title',
             'modified',
@@ -52,7 +57,7 @@ class ArticleSerializer(serializers.ModelSerializer):
         if request is None:
             return False
 
-        if not request.user.is_authenticated():
+        if not request.user.is_authenticated:
             return False
 
         return request.user.profile.has_favorited(instance)

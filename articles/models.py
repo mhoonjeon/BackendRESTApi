@@ -7,6 +7,7 @@ from model_utils.models import TimeStampedModel
 
 class Article(TimeStampedModel):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    slug = models.SlugField(db_index=True, max_length=255, unique=True)
     title = models.CharField(db_index=True, max_length=255)
 
     description = models.TextField()
@@ -50,6 +51,7 @@ class Comment(TimeStampedModel):
 
 class Tag(TimeStampedModel):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    slug = models.SlugField(db_index=True, max_length=255, unique=True)
     tag = models.CharField(max_length=255)
 
     class Meta:
