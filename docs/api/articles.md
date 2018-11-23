@@ -74,6 +74,7 @@ Authorization: Token 9944b09199c62bcf9418ad846dd0e4bbdfc6ee4b
 * `GET` `api/v1/charts/?tag=Pancrease`: 태그로 필터링  
 * `GET` `api/v1/charts/?author=admin`:  작성자로 필터링  
 * `GET` `api/v1/charts/?favorited=admin`: 좋아요로 필터링 (좋아요를 눌러서 질문을 저장할 수 있다.)
+* `GET` `api/v1/charts/?limit=5`: 질문 5개만 가져옴(My questions에서 몇개만 보여줄 때)
 
 **Response**:
 
