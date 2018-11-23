@@ -8,10 +8,11 @@ class ProfileSerializer(serializers.ModelSerializer):
     bio = serializers.CharField(allow_blank=True, required=False)
     image = serializers.SerializerMethodField()
     following = serializers.SerializerMethodField()
+    following_tag = serializers.SerializerMethodField()
 
     class Meta:
         model = Profile
-        fields = ('username', 'bio', 'image', 'following',)
+        fields = ('username', 'bio', 'image', 'following', 'following_tag')
         read_only_fields = ('username',)
 
     def get_image(self, obj):
@@ -34,3 +35,17 @@ class ProfileSerializer(serializers.ModelSerializer):
         followee = instance
 
         return follower.is_following(followee)
+
+    def get_following_tag(self, instance):
+        request = self.context.get('request', None)
+
+        if request is None:
+            return False
+
+        if not request.user.is_authenticated:
+            return False
+
+        follower = request.user.profile
+        followee = instance
+
+        return follower.is_following_tag(followee)

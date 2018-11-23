@@ -2,7 +2,8 @@ from django.urls import path
 
 from .views import (
     ArticleViewSet, ArticlesFavoriteAPIView, ArticlesFeedAPIView,
-    CommentsListCreateAPIView, CommentsDestroyAPIView, TagListAPIView
+    CommentsListCreateAPIView, CommentsDestroyAPIView, TagListAPIView,
+    TagFollowAPIView
 )
 
 urlpatterns = [
@@ -18,4 +19,5 @@ urlpatterns = [
         CommentsDestroyAPIView.as_view()),
 
     path('tags/', TagListAPIView.as_view()),
+    path('tags/<str:tag>/follow/', TagFollowAPIView.as_view()),
 ]

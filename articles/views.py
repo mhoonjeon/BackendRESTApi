@@ -1,4 +1,5 @@
 from rest_framework import generics, mixins, status, viewsets
+
 from rest_framework.exceptions import NotFound
 from rest_framework.permissions import (
     AllowAny, IsAuthenticated, IsAuthenticatedOrReadOnly
@@ -8,6 +9,8 @@ from rest_framework.views import APIView
 
 from .models import Article, Comment, Tag
 from .serializers import ArticleSerializer, CommentSerializer, TagSerializer
+
+from profiles.serializers import ProfileSerializer
 
 
 class ArticleViewSet(mixins.CreateModelMixin,
@@ -191,6 +194,17 @@ class TagListAPIView(generics.ListAPIView):
     permission_classes = (AllowAny,)
     serializer_class = TagSerializer
 
+    def get_queryset(self):
+        queryset = self.queryset
+
+        followed_by = self.request.query_params.get('followed', None)
+        if followed_by is not None:
+            queryset = queryset.filter(
+                followed_by__user__username=followed_by
+            )
+
+        return queryset
+
     def list(self, request):
         serializer_data = self.get_queryset()
         serializer = self.serializer_class(serializer_data, many=True)
@@ -207,7 +221,7 @@ class ArticlesFeedAPIView(generics.ListAPIView):
 
     def get_queryset(self):
         return Article.objects.filter(
-            author__in=self.request.user.profile.follows.all()
+            tag__in=self.request.user.profile.follows_tag.all()
         )
 
     def list(self, request):
@@ -220,3 +234,40 @@ class ArticlesFeedAPIView(generics.ListAPIView):
         )
 
         return self.get_paginated_response(serializer.data)
+
+
+class TagFollowAPIView(APIView):
+    permission_classes = (IsAuthenticated,)
+    serializer_class = ProfileSerializer
+
+    def delete(self, request, tag=None):
+        user = self.request.user.profile
+
+        try:
+            tag = Tag.objects.get(tag=tag)
+        except Tag.DoesNotExist:
+            raise NotFound('A Tag with this name was not found.')
+
+        user.unfollow_tag(tag)
+
+        serializer = self.serializer_class(user, context={
+            'request': request
+        })
+
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    def post(self, request, tag=None):
+        user = self.request.user.profile
+
+        try:
+            tag = Tag.objects.get(tag=tag)
+        except Tag.DoesNotExist:
+            raise NotFound('A Tag with this name was not found.')
+
+        user.follow_tag(tag)
+
+        serializer = self.serializer_class(user, context={
+            'request': request
+        })
+
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
